@@ -1,0 +1,31 @@
+\section{Least-squares approximation with orthonormal bases}\label{sec:part3}
+
+\subsection{}
+We notice that $\innerprod{x}{\varphi_i}\varphi_i$ is the orthogonal projection of $x$ onto $\varphi_i$. Since $\varphi_i \in \hat{\mathcal{B}}$ are orthonormal, $\sum_{\varphi_i \in \hat{\mathcal{B}}} \innerprod{x}{\varphi_i}\varphi_i$ is the orthogonal projection of $x$ onto the subspace $\operatorname{span}(\hat{\mathcal{B}}) = \hat{V}$.
+
+We need to prove that the Euclidean distance between $x$ and its orthogonal projection on $\hat{V}$ is the shortest among Euclidean distances between $x$ and other vectors in $\hat{V}$.
+
+Let $z = x - \hat{x}$, where $\hat{x} = \sum_{\varphi_i \in \hat{\mathcal{B}}} \innerprod{x}{\varphi_i}\varphi_i$. Thus, $z \perp \hat{V}$.
+
+Since any vectors in $\hat{V}$ can be written as $f(\alpha) = \sum_{\varphi_i \in \hat{\mathcal{B}}} \alpha_i \varphi_i$ ($\alpha$ is a vector and $\alpha_i$'s are scalars,) we have:
+\begin{align*}
+	\norm{x - f(\alpha)}^2 &= \norm{x - \hat{x} + \hat{x} - f(\alpha)}^2 = \norm{z + \hat{x}- f(\alpha)}^2 \\
+	&= \innerprod{z+\hat{x}-f(\alpha)}{z+\hat{x}-f(\alpha)} \\
+	&= \norm{z}^2 + \norm{\hat{x} - f(\alpha)}^2 + \innerprod{z}{\hat{x}-f(\alpha)} + \innerprod{\hat{x}-f(\alpha)}{z}
+\end{align*}
+
+We can see that $\hat{x} \in \hat{V}$ and $f(\alpha) \in \hat{V}$, therefore $\hat{x}-f(\alpha) \in \hat{V}$. Since $z \perp \hat{V} \Rightarrow z \perp \hat{x} - f(\alpha) \Rightarrow \innerprod{z}{\hat{x}-f(\alpha)} = \innerprod{\hat{x}-f(\alpha)}{z} = 0$.
+
+Therefore, $\norm{x - f(\alpha)}^2 = \norm{z}^2 + \norm{\hat{x} - f(\alpha)}^2$. Since $\norm{\hat{x}-f(\alpha)}^2 \geq 0$,
+\begin{align*}
+	&\norm{x - f(\alpha)}^2 \geq \norm{z}^2 \\
+	\Leftrightarrow &\norm{x - f(\alpha)}^2 \geq \norm{x - \hat{x}}^2 \\
+	\Leftrightarrow &\norm{x - f(\alpha)} \geq \norm{x - \hat{x}}
+\end{align*}
+
+\subsection{}
+We know that any inner products can define the valid norm
+\[\norm{x} = \sqrt{\innerprod{x}{x}}.\]
+Therefore $\norm{x - f(\alpha)}^2  = \innerprod{z+\hat{x}-f(\alpha)}{z+\hat{x}-f(\alpha)}$, with other inner products. The expansion
+\[\innerprod{z+\hat{x}-f(\alpha)}{z+\hat{x}-f(\alpha)} = \norm{z}^2 + \norm{\hat{x} - f(\alpha)}^2 + \innerprod{z}{\hat{x}-f(\alpha)} + \innerprod{\hat{x}-f(\alpha)}{z}\]
+also uses the properties of general inner products. Hence, the proof holds for other kinds of inner products, instead of only standard Euclidean one.

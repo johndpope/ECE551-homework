@@ -1,0 +1,29 @@
+\documentclass[11pt,letterpaper]{article}
+\usepackage{geometry}\geometry{left=1.5in,right=1.5in,}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{mathtools}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+
+% setup environment
+\DeclareMathOperator{\rank}{rank}
+\newcommand{\innerprod}[2]{\langle #1, #2 \rangle}
+\newcommand{\norm}[1]{\lVert #1 \rVert}
+\newcommand{\abs}[1]{\lvert #1 \rvert}
+
+\newenvironment{proof}{\paragraph{Proof:}}{\hfill$\square$}
+
+% information
+\author{Khoi-Nguyen Mac}
+\title{ECE551 - Homework 1}
+
+\begin{document}
+	\maketitle
+	
+	\input{section/part1.tex}
+	\input{section/part2.tex}
+	\input{section/part3.tex}
+	\input{section/part4.tex}
+\end{document}

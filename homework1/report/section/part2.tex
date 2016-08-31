@@ -1,0 +1,78 @@
+\section{Some basic properties of inner product spaces}\label{sec:part2}
+Notice that:
+\[\innerprod{a}{b+c}  = \overline{\innerprod{b+c}{a}} = \overline{\innerprod{b}{a}} + \overline{\innerprod{c}{a}} = \innerprod{a}{b} + \innerprod{a}{c}.\]
+
+\subsection{The Cauchy-Schwarz inequality}
+\[\abs{\innerprod{x}{y}} \leq \norm{x} \norm{y}\]
+\begin{proof}
+	If $\innerprod{x}{y} = 0$, then theorem holds because $\norm{x}$ and $\norm{y} \geq 0.$
+	
+	Suppose that $x \neq 0$ and $y \neq 0$. Let $z \in \mathbb{C}$, such that:
+	\[z = \frac{\innerprod{x}{y}}{\norm{y}^2} = \frac{\overline{\innerprod{y}{x}}}{\norm{y}^2}.\]
+	
+	We have
+	\begin{align*}
+		0 &\leq \norm{x - zy}^2 = \innerprod{x-zy}{x-zy} = \innerprod{x}{x-zy} - \innerprod{zy}{x-zy} \\
+		&= \innerprod{x}{x} - \innerprod{x}{zy} - \innerprod{zy}{x} + \innerprod{zy}{zy} \\
+		&= \norm{x}^2 -\bar{z}\innerprod{x}{y} - z\innerprod{y}{x} + z \bar{z} \norm{y}^2 \\
+		&= \norm{x}^2 - \frac{\innerprod{y}{x}\innerprod{x}{y}}{\norm{y}^2} - \frac{\innerprod{x}{y}\innerprod{y}{x}}{\norm{y}^2} + \frac{\innerprod{x}{y}}{\norm{y}^2} \frac{\innerprod{y}{x}}{\norm{y}^2} \norm{y}^2 \\
+		&= \norm{x}^2 - \frac{\innerprod{x}{y}\innerprod{y}{x}}{\norm{y}^2} \\
+		&= \norm{x}^2 - \frac{\abs{\innerprod{x}{y}}^2}{\norm{y}^2}.
+	\end{align*}
+	Therefore,
+	\begin{align*}
+		&0 \leq \norm{x}^2 - \frac{\abs{\innerprod{x}{y}}^2}{\norm{y}^2} \\
+		\Leftrightarrow & \norm{x}^2 \geq \frac{\abs{\innerprod{x}{y}}^2}{\norm{y}^2} \\
+		\Leftrightarrow & \norm{x}^2 \norm{y}^2 \geq \abs{\innerprod{x}{y}}^2 \\
+		\Leftrightarrow & \norm{x} \norm{y} \geq \abs{\innerprod{x}{y}}.
+	\end{align*}
+\end{proof}
+
+The equality occurs iff $x = \alpha y$, for some scalar $\alpha$.
+\begin{proof}
+	By substituting $x = \alpha y$, we have
+	\[\abs{\innerprod{x}{y}} = \abs{\innerprod{\alpha y}{y}} = \abs{x} \abs{\innerprod{y}{y}} = \abs{\alpha} \norm{y}^2 = \abs{\alpha} \norm{y} \norm{y} = \norm{x} \norm{y}.\]
+\end{proof}
+
+\subsection{The triangle inequality}
+$\norm{x + y}^2 \leq \norm{x} + \norm{y}$ with equality iff $y = \alpha x$
+\begin{proof}
+	\begin{align*}
+		\norm{x + y}^2 &= \innerprod{x+y}{x+y} \\
+		&= \innerprod{x}{x+y} + \innerprod{y}{x+y}\\
+		&= \innerprod{x}{x} + \innerprod{x}{y} + \innerprod{y}{x} + \innerprod{y}{y} \\
+		&= \norm{x}^2 + \norm{y}^2 + \innerprod{x}{y} + \innerprod{y}{x}
+	\end{align*}
+	
+	By Cauchy-Schwarz inequality:
+	\begin{align*}
+		& \innerprod{x}{y} \leq \norm{x} \norm{y}\\
+		\Rightarrow & \innerprod{y}{x} \leq \norm{x} \norm{y}\\
+		\Rightarrow & \innerprod{x}{y} + \innerprod{y}{x} \leq 2\norm{x}\norm{y}.
+	\end{align*}
+	
+	Therefore,
+	\begin{align*}
+		&\norm{x + y}^2 \leq \norm{x} + \norm{y}^2 + 2\norm{x}\norm{y} = (\norm{x} + \norm{y})^2 \\
+		\Rightarrow & \norm{x + y} \leq \norm{x} + \norm{y} \qquad \because \text{norms are non-negative.}
+	\end{align*}
+	
+	If $y = \alpha x$ then the equality of Cauchy-Schwarz theorem occurs. Therefore,
+	\begin{align*}
+		&\innerprod{x}{y} + \innerprod{y}{x} = 2 \norm{x} \norm{y} \\
+		\Rightarrow &\norm{x + y}^2 = \norm{x}^2 + \norm{y}^2 + 2 \norm{x} \norm{y} = (\norm{x} + \norm{y})^2 \\
+		\Rightarrow & \norm{x + y} = \norm{x} + \norm{y}.
+	\end{align*}
+\end{proof}
+
+
+\subsection{Parallelogram law}
+\[\norm{x+y}^2 + \norm{x-y}^2 = 2(\norm{x}^2 + \norm{y}^2)\]
+
+\begin{proof}
+	\begin{align*}
+		LHS &= \innerprod{x+y}{x+y} + \innerprod{x-y}{x-y} \\
+		&= (\norm{x}^2 + \norm{y}^2 + \innerprod{x}{y} + \innerprod{y}{x}) + (\norm{x}^2 + \norm{y}^2 - \innerprod{x}{y} - \innerprod{y}{x}) \\
+		&= 2(\norm{x}^2 + \norm{y}^2) = RHS.
+	\end{align*}
+\end{proof}

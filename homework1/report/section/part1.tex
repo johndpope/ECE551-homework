@@ -1,0 +1,35 @@
+\section{Geometry of orthogonal transformations in Euclidean spaces}\label{sec:part1}
+
+\subsection{}\label{subsec:p1-i}
+$U \in \mathbb{R}^{N \times N}$ is an orthogonal matrix, therefore:
+\[U^\top U = U U^\top = I.\]
+By definition,
+\begin{align*}
+	&\norm{x}^2 := x^\top x = \innerprod{x}{x}, \qquad x \in \mathbb{R}^N \\
+	\Rightarrow & \norm{Ux} = \innerprod{Ux}{Ux} = (Ux)^\top Ux = x^\top U^\top U x = x^\top x = \norm{x}^2 \\
+	\Rightarrow & \norm{Ux} = \norm{x}, \qquad \because \text{norms are non-negative}.
+\end{align*}
+
+
+\subsection{}\label{subsec:p1-ii}
+By definition, 
+\begin{align*}
+	& \innerprod{x}{y} := y^\top x = \sum_{i=0}^{N-1} x_i y_i, \qquad x,y \in \mathbb{R}^N \\
+	\Rightarrow &\innerprod{Ux}{Uy} = (Uy)^\top Ux = y^\top U^\top U x = y^\top x = \innerprod{x}{y}.
+\end{align*}
+
+
+\subsection{}
+If $M > N$ and $U^\top U = I$, then $\rank(U) = N \Rightarrow U^\top U = I_N$. Since $x \in \mathbb{R}^N$ and $y \in \mathbb{R}^N$,
+\begin{align*}
+	x^\top U^\top U x &= x^\top I_N x = x^\top x \\
+	y^\top U^\top U x &= y^\top I_N x = y^\top x.
+\end{align*}
+
+Hence, \ref{subsec:p1-i} and \ref{subsec:p1-ii} hold.
+
+
+\subsection{}
+If $M < N \Rightarrow \rank(U)$  is at most $M$.
+\[U^\top U \neq I_N.\]
+Hence, \ref{subsec:p1-i} and \ref{subsec:p1-ii} do not hold.
