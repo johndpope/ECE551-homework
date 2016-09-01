@@ -1,1 +1,70 @@
 \section{Signal Sets and Spaces}\label{sec:part4}
+
+\subsection{}\label{subsec:p4-a}
+For $S = \mathbb{R}$, we have
+\[\mathbb{R}^I = \left\{v \mid v: I \rightarrow \mathbb{R} \right\}.\]
+We know that $\mathbb{R}$ is closed under addition and scalar multiplication ($\mathbb{R}$ is a vector space.) Therefore, for $t \in I$ and $u,v \in \mathbb{R}^I$,
+\begin{align*}
+	&u[t], v[t] \in \mathbb{R} \\
+	\Rightarrow &u[t] + v[t] \in \mathbb{R} \\
+	\Rightarrow &(u+v)[t] := u[t] + v[t] \in \mathbb{R} .
+\end{align*}
+For scalar $\alpha \in \mathbb{R}$,
+\begin{align*}
+	&\alpha u[t] \in \mathbb{R} \\
+	\Rightarrow &(\alpha u)[t] := \alpha u[t] \in \mathbb{R}
+\end{align*}
+
+
+\subsection{}\label{subsec:p4-b}
+\begin{enumerate}[(i)]
+	\item For complex-valued sequences indexed by the integers, signal values live in complex space and indices live in integer space, i.e.
+	\[\mathbb{C}^I = \left\{ v \mid v: \mathbb{Z} \rightarrow \mathbb{C}\right\}. \]
+	Since $\mathbb{C}$ is also a vector space, this signal set is linear. The proof is similar as in \ref{subsec:p4-a}.
+	
+	Zero vector in $\mathbb{R}^I$ is defined as $\{ a_i \}_{i \in I}$, where $a_i = 0, \forall i \in I$.
+	
+	\item For 8-bit RGB color (three channels) digital photos of dimension $W \times H$, the signal values are $W \times H$ matrices, where each pixel is a list of three 8-bit sequences. The indices are sets of 2 natural numbers, corresponding to row and column indices. Let $\mathcal{B}_8 = \{\overline{x_0 x_1 ... x_7}\}$, where $x_i \in \{0,1\}, 0 \leq i \leq 7$, the signal set is defined as
+	\[\mathcal{B}_8^I = \left\{ v \mid v : \mathbb{N}^{W \times H} \rightarrow \mathcal{B}_8^{W \times H \times 3}\right\}.\]
+	This set is not linear because it is not closed under addition, e.g. $(11111111)_2 + (00000001)_2 = (100000000)_2 \notin \mathcal{B}_8$.
+	\[\]
+	
+	\item For 32-bit floating point buffers containing 1 second of stereo audio at $48KHz$,
+\end{enumerate}
+
+
+\subsection{}\label{subsec:p4-c}
+
+
+\subsection{}\label{subsec:p4-d}
+
+
+\subsection{}\label{subsec:p4-e}
+We see that $u[i], v[i] \in \mathbb{R}, \forall i \in I$. We need to prove that the defined inner product satisfies the three axioms:
+
+\paragraph{Conjugate symmetry:}
+\[\overline{\innerprod{v}{u}}_I = \overline{\sum_{i \in I} u[i]v[i]} = \sum_{i \in I} \overline{u[i]v[i]} = \sum_{i \in I} u[i]v[i] = \innerprod{u}{v}_I.\]
+
+\paragraph{Linearity in the first argument:}
+\[\innerprod{\alpha u}{v} = \sum_{i \in I} \alpha u[i]v[i] = \alpha \sum_{i \in I} u[i]v[i] = \alpha \innerprod{u}{v}.\]
+Let $u_1, u_2 \in \mathbb{R}^I$,
+\[\innerprod{u_1+u_2}{v} = \sum_{i \in I} (u_1[i]+u_2[i])v[i] = \sum_{i \in I} u_1[i]v[i] + \sum_{i \in I} u_2[i]v[i] = \innerprod{u_1}{v} + \innerprod{u_2}{v}.\]
+
+\paragraph{Positive-definiteness:}
+\[\innerprod{u}{u} = \sum_{i \in I} u[i]u[i] \sum_{i \in I} (u[i])^2 \geq 0\]
+Let $u$ be a zero vector, i.e. $u[i] = 0, \forall i \in I$,
+\[\innerprod{u}{u} = \sum_{i \in I} (u[i])^2 = \sum_{i \in I} 0 = 0.\]
+
+Hence, $\innerprod{u}{v}_I := \sum_{i \in I} v[i]u[i]$ is an inner-product in $\mathbb{R}^I$.
+
+\subsection{}\label{subsec:p4-f}
+For an arbitrary $t \in I$, let $e_t = \{\epsilon_\tau\}_{\tau \in I}$, s.t.
+\[
+\epsilon_\tau = \begin{cases}
+1, &\tau = t\\
+0, &\text{otherwise}.
+\end{cases}
+\]
+Since $e_t \subset \mathbb{R}^I$, we have
+\[\innerprod{u}{e_t}_I = \sum_{\tau \ in I} u[\tau] \epsilon_\tau = u[t].\]
+which satisfies the criteria. Hence, the defined $e_t$ is the standard basis (or reproducing kernel).
