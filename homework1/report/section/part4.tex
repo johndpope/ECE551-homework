@@ -41,6 +41,13 @@ We can consider signals with indices $I_1 \subset I_2$ are truncated version of 
 
 
 \subsection{}\label{subsec:p4-d}
+\paragraph{Linearity} Let $u, v \in \mathbb{R}^I$ and $\alpha, \beta$ be scalars
+\begin{align*}
+	T(\alpha u + \beta v)_k = T(\alpha u)_k + T(\beta v)_k = \alpha (Tu)_k + \beta (T_v)_k.
+\end{align*}
+Hence, $T$ is linear.
+
+\paragraph{Invertibility} Let $Tu = v$. $T$ can be seen as a permutation matrix that maps the $k$ entry of $v$ to $i_k$ entry of $u$. Therefore $T$ has full rank and $\rank(T) = N$ (there are $N$ indices). Hence, $T$ is invertible (full rank matrices are invertible.)
 
 
 \subsection{}\label{subsec:p4-e}
