@@ -24,16 +24,20 @@ For scalar $\alpha \in \mathbb{R}$,
 	
 	Zero vector in $\mathbb{R}^I$ is defined as $\{ a_i \}_{i \in I}$, where $a_i = 0, \forall i \in I$.
 	
-	\item For 8-bit RGB color (three channels) digital photos of dimension $W \times H$, the signal values are $W \times H$ matrices, where each pixel is a list of three 8-bit sequences. The indices are sets of 2 natural numbers, corresponding to row and column indices. Let $\mathcal{B}_8 = \{\overline{x_0 x_1 ... x_7}\}$, where $x_i \in \{0,1\}, 0 \leq i \leq 7$, the signal set is defined as
-	\[\mathcal{B}_8^I = \left\{ v \mid v : \mathbb{N}^{W \times H} \rightarrow \mathcal{B}_8^{W \times H \times 3}\right\}.\]
-	This set is not linear because it is not closed under addition, e.g. $(11111111)_2 + (00000001)_2 = (100000000)_2 \notin \mathcal{B}_8$.
-	\[\]
+	\item For 8-bit RGB color (three channels) digital photos of dimension $W \times H$, we can choose the value set to be $\mathcal{B}_8 = \{\overline{x_0 x_1 ... x_7}\}, x_i = \{0,1\}, i = \{0,7\}$, denoting the set of all binary sequences with length of 8. The indices are chosen as set of 3 natural numbers, corresponding to the width, height, and channel, i.e.
+	\[\mathcal{B}_8^I = \left\{ v \mid v : \mathbb{N}^{W \times H \times 3} \rightarrow \mathcal{B}_8\right\}.\]
+
+	This set is not linear because it is not closed under addition, e.g. $(11111111)_2 + (00000001)_2 = (100000000)_2 \notin \mathcal{B}_8$. We can also see that , in general, $\mathcal{B}_k$ with finite $k$ is not a linear space.
 	
-	\item For 32-bit floating point buffers containing 1 second of stereo audio at $48KHz$,
+	\item For 32-bit floating point buffers containing 1 second of stereo audio at 48KHz, we can choose the value space as $\mathcal{B}_{32}$, with similar definition as $\mathcal{B}_8$. Since the audio is 1-second long with 48KHz, there are 48k samples. Therefore, the signal set can be described as:
+	\[\mathcal{B}_{32}^I = \left\{v \mid v : \mathbb{N}^{48K \times 2} \rightarrow \mathcal{B}_{32}\right\}.\]
+	
+	We can see that $\mathcal{B}_{32}$ is not a linear, therefore the signal set is not linear.
 \end{enumerate}
 
 
 \subsection{}\label{subsec:p4-c}
+We can consider signals with indices $I_1 \subset I_2$ are truncated version of signals with indices $I_2$, where the signals in $I_d = I_2 / I_1$ are reduced to 0. So $\mathbb{R}^{I_1}$ is a subset of $\mathbb{R}^{I_2}$. Since $\mathbb{R}$ is a subspace, $\mathbb{R}^{I_1}$ is closed under addition and scalar multiplication. Hence, $\mathbb{R}^{I_1}$ is a subspace of $\mathbb{R}^{I_2}$.
 
 
 \subsection{}\label{subsec:p4-d}
