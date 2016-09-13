@@ -2,10 +2,14 @@
 
 \begin{enumerate}[(a)]
 \item If $P = P^*$,
-\[\innerprod{Px}{y} = y^* (Px) = (y^*P)x = (y^*P^*)x = (Py)^*x = \innerprod{x}{Py}.\]
+\[\innerprod{Px}{y}_0 = y^* (Px) = (y^*P)x = (y^*P^*)x = (Py)^*x = \innerprod{x}{Py}_0, \qquad \forall x, y \in V.\]
 Hence, $P$ is self-adjoint with respect to $\innerprod{\cdot}{\cdot}$ on $\mathbb{C}^N$ if $P = P^*$.
 
-\item
+\item Remind that a non-zero vector $v \in \mathbb{C}^N$ is an eigenvector of square matrix $P \in \mathbb{C}^{N\times N}$ if $Pv = \lambda v$, where $\lambda$ is the eigenvalue associated with $v$. 
+
+If $P = P^2$,
+\[\lambda v = P v = P^2 v = \lambda^2 v\]
+Since $v \neq 0$, $\lambda = \lambda^2 \Leftrightarrow \lambda = 0 \text{ or } \lambda = 1$. Hence the eigenvalues of an oblique projection is 0 or 1.
 
 \item
 \end{enumerate}
