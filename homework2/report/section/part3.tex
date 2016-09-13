@@ -11,5 +11,22 @@ If $P = P^2$,
 \[\lambda v = P v = P^2 v = \lambda^2 v\]
 Since $v \neq 0$, $\lambda = \lambda^2 \Leftrightarrow \lambda = 0 \text{ or } \lambda = 1$. Hence the eigenvalues of an oblique projection is 0 or 1.
 
-\item
+\item Since $P = T^{-1}DT$, where $D$ is a diagonal matrix with eigenvalues found in part (b), $D$'s diagonal is formed by 1 and 0. Therefore, $D^* = D$
+
+Since $\innerprod{x}{y}_T \triangleq y^*T^*Tx$, we have
+\begin{align*}
+	\innerprod{Px}{y}_T
+	&= y^* T^* T P x \\
+	&= y^* T^* T (T^{-1} D T) x \\
+	&= y^* T^* D T x \\
+	&= y^* T^* D I^* T x \\
+	&= y^* T^* D (T T^{-1})^* T x \\
+	&= y^* T^* D (T^{-1})^* T^* T x \\
+	&= y^* T^* D^* (T^{-1})^* T^* T x \\
+	&= y^* (T^{-1}DT)^* T^* T x \\
+	&= y^* P^* T^* T x \\
+	&= (Py)^* T^* T x \\
+	&= \innerprod{x}{Py}_T
+\end{align*}
+
 \end{enumerate}
