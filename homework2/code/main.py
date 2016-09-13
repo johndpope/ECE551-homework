@@ -2,6 +2,8 @@ from numpy import zeros
 from numpy.linalg import norm
 import numpy as np
 import scipy
+import matplotlib.pyplot as plt
+import ipdb
 
 
 def gram_schmidt(V):
@@ -38,6 +40,9 @@ def project_on_tiles(img, tiles):
 
 def main():
     # part a
+    ipdb.set_trace()
+    V = np.random.random((5,10))
+    Vo = gram_schmidt(V)
 
     # part b
     img_rgb = scipy.misc.imread('675692436.jpg') # Average RGB colors to a single channel

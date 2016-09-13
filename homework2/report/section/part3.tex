@@ -29,4 +29,40 @@ Since $\innerprod{x}{y}_T \triangleq y^*T^*Tx$, we have
 	&= \innerprod{x}{Py}_T
 \end{align*}
 
+\item We have $P = T^{-1}DT \Rightarrow P^* = T^* D^* (T^{-1})^*$.
+\begin{align*}
+	\innerprod{x-Px}{Px}_T 
+	&= x^* P^* T^* T (x - Px) = x^* P^* T^* T x - x^* P^* T^* T P x \\
+	&= x^* T^* D^* (T^{-1})^* T^* T x - x^* T^* D^* (T^{-1})^* T^* T T^{-1}DT x \\
+	&= x^* T^* D^* ((T^{-1})^* T^*) T x - x^* T^* D^* ((T^{-1})^* T^*) (T T^{-1})DT x \\
+	&= x^* T^* D^* T x - x^* T^* D^* DT x
+\end{align*}
+Since $D$ is a diagonal matrix with only 1 and 0, $D D^* = D^* D = D = D^*$. Therefore,
+\begin{align*}
+	\innerprod{x-Px}{Px}_T 
+	&= x^* T^* D^* T x - x^* T^* D^* DT x \\
+	&= x^* T^* D^* T x - x^* T^* D^* T x = 0
+\end{align*}
+Hence, $x-Px \perp Px$.
+
+\item From part (c), we know that $P$ is oblique and self-adjoint, i.e. $P = P^2 = P^*$. Since $P \in \mathbb{C}^{N \times N}$, $I = I_N$ and $PI = IP = P$. Therefore,
+\[(I-P)^2 = (I-P)(I-P) = I^2 - IP - PI + P^2 = I - 2P + P^2 = I - 2P + P = I - P\]
+and
+\[(I-P)^* = I^* - P^* = I - P\]
+Hence, $I-P$ is oblique and self-adjoint.
+
+We know that for any matrix $A$, $\mathcal{R}(A) \perp \mathcal{N}(A^\top)$. Therefore,
+\[\mathcal{R}(I-P) \perp \mathcal{N}((I-P)^\top)\]
+Since $I-P$ is proven to be self-adjoint, $(I-P)^\top = I-P$
+\[\Rightarrow \mathcal{R}(I-P) \perp \mathcal{N}(I-P)\]
+
+From the definition of null space:
+\begin{align*}
+	\mathcal{N}(P) &= \{x \mid Px = 0\} \\
+	\mathcal{N}(I-P) &= \{x \mid (I-P)x = 0\}
+\end{align*}
+We proved that $x-Px \perp Px$ wrt $\innerprod{\cdot}{\cdot}_T$, so 
+\[(I-P)x \perp Px \Rightarrow \mathcal{N}(I-P) \perp \mathcal{N}(P)\]
+We already have $\mathcal{R}(I-P) \perp \mathcal{N}(I-P)$, thus $\mathcal{R}(I-P) = \mathcal{N}(P)$.
+
 \end{enumerate}
