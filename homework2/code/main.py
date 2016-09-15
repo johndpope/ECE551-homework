@@ -3,7 +3,7 @@ from numpy import zeros
 from numpy.linalg import norm
 from numpy.random import rand
 import matplotlib.pyplot as plt
-import scipy, cv2, time
+import cv2, time
 import ipdb
 
 
@@ -92,7 +92,7 @@ def main():
 
     start_time = time.time()
     # Generate circular tiles. Smaller R -> better (and slower) approximation
-    T = gen_circ_tiles(img.shape, 30)
+    T = gen_circ_tiles(img.shape, 20)
     T = np.reshape(T,(T.shape[0], W*H)) # Flatten tiles from I to 0 .. W*H-1
     To = gram_schmidt(T) # This is where your code should run
     To = np.reshape(To,(To.shape[0], H, W)) # Re-rectangle tiles back to I
