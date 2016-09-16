@@ -1,1 +1,33 @@
 \section{Linear Least-Squares Approximation}\label{sec:part2}
+
+\begin{enumerate}[(a)]
+\item $y \in \text{colsp}(A) \Rightarrow y \in \mathcal{R}(A)$. Suppose that $A \in \mathbb{C}^{M \times N}$, by the definition of range space:
+\[\mathcal{R}(A) = \{y \in \mathbb{C}^M \mid y = Ax, x \in \mathbb{C}^N\}\]
+Hence, $\hat{y} = y$.
+
+\item $y \perp \text{colsp}(A) \Rightarrow y \perp \mathcal{R}(A) \Rightarrow y \in \mathcal{N}(A^*)$. Be definition of null space:
+\[\mathcal{N}(A^*) = \{y \in \mathbb{C}^M \mid A^*y=0\}\]
+Hence, $\hat{y}=0$.
+
+\item In general, consider $\norm{y - Ax}$,
+\begin{align*}
+	\frac{\partial \norm{y-Ax}}{\partial x_i}
+	&= \frac{\partial (y-Ax)^\top(y-Ax)}{\partial x_i} \\
+	&= \frac{\partial (y-Ax)^\top}{\partial x_i} (y-Ax) + (y-Ax)^\top \frac{\partial (y-Ax)}{\partial x_i} \\
+	&= 2\frac{\partial (y-Ax)^\top}{\partial x_i}(y-Ax)
+\end{align*}
+
+Since we can express $x$ as $\sum_{i=1}^{N} x_i e_i$, where $e_i$ is a elementary basis, then
+\begin{align*}
+	\frac{\partial (y-Ax)}{\partial x_i} 
+	&= \frac{\partial y}{\partial x_i} - A\frac{\partial x}{\partial x_i} \\
+	&= -A\frac{\partial x}{\partial x_i} \\
+	&= -Ae_i = -a_i
+\end{align*}
+where $a_i$ is a column vector of $A$. Therefore
+\begin{align*}
+	\frac{\partial \norm{y-Ax}}{\partial x_i} = -2a_i^\top(y-Ax)
+\end{align*}
+
+Since $\hat{x} = \arg \min \norm{y-Ax}^2$, $\hat{y} = A\hat{x}$ is the projection of $y$ on space spanned by columns of $A$. Therefore $y - \hat{y} = y - A\hat{x} \perp \text{span}\{a_i\} \Rightarrow y - A\hat{x} \perp a_i \Rightarrow a_i^\top (y-A\hat{x}) = 0$. Hence, the partial derivatives vanish.
+\end{enumerate}

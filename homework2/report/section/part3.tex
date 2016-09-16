@@ -65,5 +65,12 @@ We proved that $x-Px \perp Px$ wrt $\innerprod{\cdot}{\cdot}_T$, so
 \[(I-P)x \perp Px \Rightarrow \mathcal{N}(I-P) \perp \mathcal{N}(P)\]
 We already have $\mathcal{R}(I-P) \perp \mathcal{N}(I-P)$, thus $\mathcal{R}(I-P) = \mathcal{N}(P)$.
 
-\item 
+\item We have
+\begin{align*}
+	x - Py &= x - Px + Px - Py = (x-Px) + P(x-y)
+\end{align*}
+From part (d), $x-Px \perp P(x-y)$. By Pythagorean,
+\begin{align*}
+	\norm{x - Py}_T^2 = \norm{x-Px}_T^2 + \norm{P(x-y)}_T^2 \geq \norm{x-Px}_T^2.
+\end{align*}
 \end{enumerate}
