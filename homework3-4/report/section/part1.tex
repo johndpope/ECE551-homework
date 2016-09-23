@@ -1,7 +1,37 @@
 \section{Deterministic Correlation Sequences}\label{sec:p1}
 
 \begin{enumerate}[(a)]
-\item 
-\item 
+\item It is obvious that $\sigma$ is a delay operator, i.e. $\sigma = T_1$
+\begin{align*}
+	\sigma^k x &= (\sigma(\sigma(...(\sigma x)))) \qquad (k \text{ times of } \sigma) \\
+	\Rightarrow \sigma^k x &= T_k x \\
+	\Rightarrow (\sigma ^k x)[n] &= x[n-k].
+\end{align*}
+
+Similarly, $\sigma^{-1} x = T_{-1} x \Rightarrow (\sigma^{-1} x)[n] = x[n+1]$.
+
+%----------------------------------------------------------------------------------------------
+\item Prove or disprove:
+\begin{enumerate}[i.]
+	\item \begin{align*}
+		a_x[-k]^* &= \innerprod{x}{\sigma^k x}^* = \innerprod{\sigma^k x}{x} = \sum_{n \in \mathbb{Z}} x[n]^* x[n-k] \\
+		&= \sum_{n \in \mathbb{Z}} x[n+k]^* x[n-k+k] = \sum_{n \in \mathbb{Z}} x[n+k]^* x[n] = a_x[k]
+	\end{align*}
+	Hence, $a_x[k] = a_x[-k]^*$.
+	\item 
+	\item \begin{align*}
+		c_{y,x}[-n]^* &= \left(\sum_{i \in \mathbb{Z}} y[i] x[i+n]^*\right)^* = \sum_{i \in \mathbb{Z}} x[i+n]y[i]^* \\
+		&= \sum_{i \in \mathbb{Z}} x[i+n-n]y[i-n]^* = \sum_{i \in \mathbb{Z}} x[i]y[i-n]^* = c_{x,y}[n]
+	\end{align*}
+	Hence, $c_{x,y}[n] = c_{y,x}[-n]^*$.
+	\item \begin{align*}
+		c_{x,y}[-n]^* &= \left(\sum_{i \in \mathbb{Z}} x[i] y[i+n]^*\right)^* = \sum_{i \in \mathbb{Z}} x[i]^*y[i+n] \\
+		&= \sum_{i \in \mathbb{Z}} x[i-n]^*y[i] = c_{y,x}[n] \neq c_{x,y}[n].
+	\end{align*}
+	Hence, $c_{x,y}[n] \neq c_{x,y}[-n]^*$.
+	\item
+\end{enumerate}
+
+%----------------------------------------------------------------------------------------------
 \item 
 \end{enumerate}
