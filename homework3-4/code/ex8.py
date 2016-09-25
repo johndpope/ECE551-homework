@@ -2,8 +2,6 @@ import numpy as np
 from numpy.random import randint, randn
 from scipy.interpolate import splev, splrep
 import matplotlib.pyplot as plt
-import ipdb
-
 
 def gen_wave(UIN, n0=0):
     T = np.arange(100)
