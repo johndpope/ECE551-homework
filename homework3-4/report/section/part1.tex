@@ -52,7 +52,7 @@ Similarly, $\sigma^{-1} x = T_{-1} x \Rightarrow (\sigma^{-1} x)[n] = x[n+1]$.
 	\begin{align*}
 	c_{x_1, x_2}[k] = \alpha_1 \alpha_2 \sum_{n \in \mathbb{Z}} x[m] x[m - \Delta - k] = \alpha_1 \alpha_2 a_x[-\Delta - k].
 	\end{align*}
-	We know that $\abs{a_x[k]}$ is maximized at $k = 0$, therefore $a_x[-\Delta -k]$ is maximized when $-\Delta - k = 0 \Leftrightarrow \Delta = - k$. To determine the time delay $\Delta$, we change the value of $k$ until the crosscorelation between $x_1$ and $x_2$ is maximized; then the value of $\Delta$ is $-k$. After we have $\Delta$ we delay one of the 2 signals $x_1$ or $x_2$ and divide them to get $\rho = \frac{\alpha_1}{\alpha_2}$.
+	We know that $\abs{a_x[k]}$ is maximized at $k = 0$, therefore $a_x[-\Delta -k]$ is maximized when $-\Delta - k = 0 \Leftrightarrow \Delta = - k$. To determine the time delay $\Delta$, we change the value of $k$ until the crosscorelation between $x_1$ and $x_2$ is maximized; then the value of $\Delta$ is $-k$. After we have $\Delta$ we shift $x_1$ by $\Delta$ divide it with $x_2$ get $\rho = \frac{\alpha_1}{\alpha_2}$.
 	
 	\item We can shift $x_1$ and $x_2$ by the same amount and still get the same result for $\Delta$. Therefore we cannot find $n_1$ and $n_2$ explicitly. The same thing apply for scaling $\alpha_1$ and $\alpha_2$.
 \end{enumerate}
