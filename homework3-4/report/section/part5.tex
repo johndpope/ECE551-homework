@@ -1,9 +1,100 @@
 \section{Some DFT Properties}\label{sec:p5}
 
 \begin{enumerate}[(a)]
-	\item 
-	\item 
-	\item 
-	\item 
-	\item 
+%----------------------------------------------------------------------------------------------
+\item Define $k \bmod N$ as $\langle k \rangle_N$, i.e.
+\[\langle k + N \rangle_N = \langle k \rangle_N.\]
+
+The DFT of $x[n]$ is defined as
+\[X[k] = \sum_{n=0}^{N-1} x[n] W_N^{-kn}\]
+where
+\[W_N = e^{j\frac{2\pi}{N}} = \cos(2\pi/N) + j\sin(2\pi /N).\]
+Assume that $k = lN+r \Leftrightarrow \langle k \rangle_N = r$, then
+\begin{align*}
+	W_N^k
+	&= \exp(j \frac{2\pi}{N} (lN+r)) \\
+	&= \exp(j \frac{2\pi}{N} lN) \exp(j \frac{2\pi}{N} r) \\
+	&= 1 \exp(j \frac{2\pi}{N} r) \\
+	&= W_N^r = W_N^{\langle k \rangle_N}.
+\end{align*}
+Similarly, $W_N^{mk} = W_N^{m \langle k \rangle_N}$.
+
+Furthermore, 
+\begin{align*}
+	X[k]
+	&= \sum_{n=0}^{N-1}x[n] W_N^{-n(lN+r)} \\
+	&= \sum_{n=0}^{N-1} x[n] W_N^{-nlN} W_N^{-nr} \\
+	&= \sum_{n=0}^{N-1} x[n] W_N^{-nr} \\
+	&= X[r] = X[\langle k \rangle_N].
+\end{align*}
+
+Therefore,
+\begin{align*}
+	DFT(x[\langle -n \rangle_N])
+	&= \sum_{n=0}^{N-1}x[\langle -n \rangle_N] W_N^{-nk} \\
+	&= \sum_{m=0}^{N-1} x[m] W_N^{-\langle -m\rangle_N k} \\
+	&= \sum_{m=0}^{N-1} x[m] W_N^{mk} \\
+	&= X[-k] \\
+	&= X[\langle -k \rangle_N].
+\end{align*}
+
+%----------------------------------------------------------------------------------------------
+\item The circular convolution between $x$ and $y$ can be defined as
+\begin{align*}
+	(x \circledast y)[n] 
+	&= \sum_{m=0}^{N-1} x[m] y[\langle n - m\rangle_N].
+\end{align*}
+Therefore
+\begin{align*}
+	DFT((x \circledast y)[n])
+	&= \sum_{n=0}^{N-1} \sum_{m=0}^{N-1} x[m] y[\langle n-m\rangle_N] W_N^{-nk} \\
+	&= \sum_{m=0}^{N-1} x[m] \sum_{n=0}^{N-1} y[\langle n-m \rangle_N]W_N^{-nk} \\
+	&= \sum_{m=0}^{N-1} x[m] W_N^{-mk} Y[k] \\
+	&= Y[k] \sum_{m=0}^{N-1} x[m] W_N^{-nk} \\
+	&= Y[k] X[k]
+\end{align*}
+
+%----------------------------------------------------------------------------------------------
+\item The inverse DFT is defined as
+\[x[n] = \frac{1}{N} \sum_{k=0}^{N-1} X[k] W_N^{kn}\]
+Therefore
+\begin{align*}
+	IDFT((X \circledast Y)[n])
+	&= \frac{1}{N} \sum_{k=0}^{N-1} (X \circledast Y)[k] W_N^{kn} \\
+	&= \frac{1}{N} \sum_{k=0}^{N-1} \left( X[m] Y[\langle k - m \rangle_N]\right) W_N^{kn} \\
+	&= \frac{1}{N} \sum_{k=0}^{N-1} \left( X[m] Y[\langle k - m \rangle_N]\right) W_N^{mn} W_N^{(k-m)n} \\
+	&= \frac{1}{N} \sum_{m=0}^{N-1} X[m]W_N^{mn} \sum_{k=0}^{N-1}Y[\langle k-m \rangle_N] W_N^{(k-m)n} \\
+	&= x[n]y[n].
+\end{align*}
+
+%----------------------------------------------------------------------------------------------
+\item If $x[n]$ is real,
+\begin{align*}
+	&\Rightarrow x[n] = x^*[n] \\
+	&\Rightarrow DFT(x[n]) = DFT(x^*[n]) \\
+	&\Rightarrow X[k] = X^*[\langle -k \rangle_N].
+\end{align*}
+
+If $x[n]$ is also symmetric,
+\begin{align*}
+	&\Rightarrow x[n] = x[\langle -n \rangle_N] \\
+	&\Rightarrow DFT(x[n]) = DFT(x[\langle -n \rangle_N]) \\
+	&\Rightarrow X[k] = X[\langle -k \rangle_N].
+\end{align*}
+
+Therefore
+\[X[k] = X^*[\langle -k \rangle_N] = X[\langle -k \rangle_N].\]
+Hence, $X[k]$ is real (and also symmetric.)
+
+%----------------------------------------------------------------------------------------------
+\item If $x[n]$ is symmetric (and real),
+\begin{align*}
+&\Rightarrow x[n] = -x[\langle -n \rangle_N] \\
+&\Rightarrow DFT(x[n]) = -DFT(x[\langle -n \rangle_N]) \\
+&\Rightarrow X[k] = -X[\langle -k \rangle_N].
+\end{align*}
+
+Therefore
+\[X[k] = X^*[\langle -k \rangle_N] = -X[\langle -k \rangle_N].\]
+Hence, $X[k]$ is imaginary.
 \end{enumerate}

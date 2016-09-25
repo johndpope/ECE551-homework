@@ -18,20 +18,42 @@ Similarly, $\sigma^{-1} x = T_{-1} x \Rightarrow (\sigma^{-1} x)[n] = x[n+1]$.
 		&= \sum_{n \in \mathbb{Z}} x[n+k]^* x[n-k+k] = \sum_{n \in \mathbb{Z}} x[n+k]^* x[n] = a_x[k]
 	\end{align*}
 	Hence, $a_x[k] = a_x[-k]^*$.
-	\item 
+	
+	\item We have $a_x[0] = \innerprod{x}{x} = \norm{x}^2$.	By Cauchy-Schwarz inequality:
+	\[\abs{a_x[k]} = \innerprod{x}{\sigma^{-k}x} \leq \norm{x} \norm{\sigma^{-k}x}.\]
+	Since delay does not change the norm, $\norm{\sigma^{-k}x} = \norm{x}$. Therefore:
+	\[\abs{a_x[k]} \leq \norm{x}^2 = a_x[0].\]
+	
 	\item \begin{align*}
 		c_{y,x}[-n]^* &= \left(\sum_{i \in \mathbb{Z}} y[i] x[i+n]^*\right)^* = \sum_{i \in \mathbb{Z}} x[i+n]y[i]^* \\
 		&= \sum_{i \in \mathbb{Z}} x[i+n-n]y[i-n]^* = \sum_{i \in \mathbb{Z}} x[i]y[i-n]^* = c_{x,y}[n]
 	\end{align*}
 	Hence, $c_{x,y}[n] = c_{y,x}[-n]^*$.
+	
 	\item \begin{align*}
 		c_{x,y}[-n]^* &= \left(\sum_{i \in \mathbb{Z}} x[i] y[i+n]^*\right)^* = \sum_{i \in \mathbb{Z}} x[i]^*y[i+n] \\
 		&= \sum_{i \in \mathbb{Z}} x[i-n]^*y[i] = c_{y,x}[n] \neq c_{x,y}[n].
 	\end{align*}
 	Hence, $c_{x,y}[n] \neq c_{x,y}[-n]^*$.
-	\item
+	
+	\item 
 \end{enumerate}
 
 %----------------------------------------------------------------------------------------------
 \item 
+\begin{enumerate}[i.]
+	\item We have
+	\begin{align*}
+	c_{x_1, x_2}[k]
+	&= \sum_{n \in \mathbb{Z}} \alpha_1 x[n - n_1] \alpha_2 x[n - n_2 - k] \\
+	&= \alpha_1 \alpha_2 \sum_{n \in \mathbb{Z}} x[n - n_1] x[n - n_2 - k].
+	\end{align*}
+	Let $m = n - n_1 \Rightarrow n - n_2 - k = m + n_1 - n_2 - k = m - \Delta - k$. Then
+	\begin{align*}
+	c_{x_1, x_2}[k] = \alpha_1 \alpha_2 \sum_{n \in \mathbb{Z}} x[m] x[m - \Delta - k] = \alpha_1 \alpha_2 a_x[-\Delta - k].
+	\end{align*}
+	We know that $\abs{a_x[k]}$ is maximized at $k = 0$, therefore $a_x[-\Delta -k]$ is maximized when $-\Delta - k = 0 \Leftrightarrow \Delta = - k$. To determine the time delay $\Delta$, we change the value of $k$ until the crosscorelation between $x_1$ and $x_2$ is maximized; then the value of $\Delta$ is $-k$. After we have $\Delta$ we delay one of the 2 signals $x_1$ or $x_2$ and divide them to get $\rho = \frac{\alpha_1}{\alpha_2}$.
+	
+	\item We can shift $x_1$ and $x_2$ by the same amount and still get the same result for $\Delta$. Therefore we cannot find $n_1$ and $n_2$ explicitly. The same thing apply for scaling $\alpha_1$ and $\alpha_2$.
+\end{enumerate}
 \end{enumerate}

@@ -1,1 +1,28 @@
 \section{$Z$-Transform of Downsampled Signals}\label{sec:p6}
+
+Let
+\[p_N[n] = \begin{cases}
+1, & n = mN\\ 0, & \text{else}
+\end{cases}\]
+\begin{align*}
+	\Rightarrow P_N(z)
+	= \sum_{n \in \mathbb{Z}} p_N[n] z^{-n} 
+	= \sum_{n \in \mathbb{Z}} z^{-Nn} 
+	= \sum_{n \in \mathbb{Z}} W^{-n}
+\end{align*}
+We have
+\[\frac{1}{N} \sum_{k=0}^{N-1} W^{nk} = \begin{cases}
+\frac{1}{N} \times N = 1, & n = mN\\
+0, & \text{else}
+\end{cases} = p_N[n]\]
+Therefore
+\begin{align*}
+	Y(z)
+	&= \sum_{n \in \mathbb{Z}} y[n] z^{-n} \\
+	&= \sum_{n \in \mathbb{Z}} x[Nn] z^{-n} \\
+	&= \sum_{k = Nn, n \in \mathbb{Z}} x[k] z^{-k/N} \\
+	&= \sum_{k \in \mathbb{Z}} x[k] z^{-k/N} p_N[k] \\
+	&= \frac{1}{N} \sum_{m=0}^{N-1} \sum_{k \in \mathbb{Z}} W^{mk} z^{-k/N} x[k] \\
+	&= \frac{1}{N} \sum_{m=0}^{N-1}X(W^m z^{1/N})
+\end{align*}
+Replacing $z$ with $e^{j\omega}$, we have

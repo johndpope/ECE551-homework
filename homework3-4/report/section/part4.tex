@@ -1,6 +1,78 @@
 \section{The $Z$-Transform of Autocorrelation}\label{sec:p4}
 
 \begin{enumerate}[(a)]
-	\item 
-	\item 
+%----------------------------------------------------------------------------------------------
+\item We have
+\begin{align*}
+	A_x(z) 
+	&= \sum_{n \in \mathbb{Z}} a_x[n] z^{-n} \\
+	&= \sum_{n \in \mathbb{Z}} \sum_{k \in \mathbb{Z}} x[k] x[k+n] z^{-n} \\
+	&= \sum_{n \in \mathbb{Z}} \sum_{k \in \mathbb{Z}} x[k] x[k+n] z^{-n} z^k z^{-k}\\
+	&= \sum_{n \in \mathbb{Z}} \sum_{k \in \mathbb{Z}} x[k] z^k x[k+n] z^{-(n+k)}\\
+	&= \sum_{k \in \mathbb{Z}} \sum_{m \in \mathbb{Z}} x[k] z^k x[m] z^{-m}\\
+	&= \sum_{k \in \mathbb{Z}} x[k] z^k \sum_{m \in \mathbb{Z}} x[m] z^{-m}\\
+	&= X(z) X(z^{-1})
+\end{align*}
+
+Consider $X(z) = \sum_{n \in \mathbb{Z}} x[n] z^{-n} = \sum_{n \in \mathbb{Z}} (x[n]^{1/n} z^{-1})^n = \frac{1}{1 - x[n]^{1/n} z^{-1}}$. Then the $ROC_{X(z)}$ is
+\[ \abs{x[n]^{1/n}z^{-1}} < 1 \Leftrightarrow \abs{z} > \abs{x[n]^{1/n}} .\]
+
+Similarly, for $X(-z) = \frac{1}{1 - x[n]^{1/n} z}$, the $ROC_{X(-z)}$ is
+\[ \abs{x[n]^{1/n}z} < 1 \Leftrightarrow \abs{\frac{1}{z}} > \abs{x[n]^{1/n}} \Leftrightarrow \abs{z} < \abs{x[n]^{-1/n}} .\]
+
+Hence, the $ROC_{A}$ is
+\[ \left\{ \abs{x[n]^{1/n}} < \abs{z} < \abs{x[n]^{-1/n}} \right\}.\]
+
+%----------------------------------------------------------------------------------------------
+\item 
+\begin{enumerate}[i.]
+	\item $x_1[n] = \alpha^n u[n]$, therefore $ROC_{A_{x_1}}$ is 
+	\[\left\{ \abs{(\alpha^n)^{1/n}} < \abs{z} < \abs{(\alpha^n)^{-1/n}} \right\} = \left\{ \abs{\alpha} < \abs{z} < \abs{\frac{1}{\alpha}} \right\}\]
+	
+	\item The $z$-transform of $x_1$ is
+	\begin{align*}
+		X_1(z) 
+		&= \sum_{n \in \mathbb{Z}} x_1[n] z^{-n} \\
+		&= \sum_{n \in \mathbb{Z}} \alpha^n u[n] z^{-n} \\
+		&= \sum_{n=0}^{\infty} \alpha^n z^{-n} \\
+		&= \sum_{n=0}^{\infty} (\alpha z^{-1})^n \\
+		&= \frac{1}{1 - \alpha z^{-1}} = \frac{z}{z - \alpha}
+	\end{align*}
+	\begin{align*}
+		\Rightarrow A_{x_1}(z) 
+		&= X_1(z) X_1(z^{-1}) \\
+		&= \frac{z}{z - \alpha} \frac{z^{-1}}{z^{-1} - \alpha} \\
+		&= \frac{1}{(z - \alpha)(z^{-1} - \alpha)} \\
+		&= z\frac{1}{(z - \alpha)(1 - \alpha z)}
+	\end{align*}
+	
+	Let $\frac{1}{(z - \alpha)(1 - \alpha z)}  = \frac{A}{z - \alpha} + \frac{B}{1- \alpha z} = \frac{A(1 - \alpha z) + B(z - \alpha)}{(z - \alpha)(1 - \alpha z)}$, then:
+	\begin{align*}
+		&A(1 - \alpha z) + B(z - \alpha) = 1 \Rightarrow (-A \alpha + B)z + A + \alpha B = 1 \\
+		&\Rightarrow \begin{cases}
+		-A \alpha + B = 0 \\
+		A + \alpha B = 1
+		\end{cases} \\
+		&\Rightarrow \begin{cases}
+		A = \frac{1}{\alpha^2 + 1} \\
+		B = \frac{\alpha}{\alpha^2 + 1}
+		\end{cases}
+	\end{align*}
+	
+	Therefore,
+	\begin{align*}
+		A_{x_1}(z) 
+		&= z \left( \frac{1}{(z - \alpha)(\alpha^2 + 1)} + \frac{1}{(1-\alpha z)(\alpha^2 + 1)} \right) \\
+		&= z \left( \frac{1}{z(\alpha^2+1) - \alpha^3 - \alpha} + \frac{1}{z(-\alpha^3 - \alpha) + \alpha^2 +1} \right)
+	\end{align*}
+	
+	Hence,
+	\begin{align*}
+		a_{x_1}[n] &= \frac{1}{2 \pi j} \int_{ROC_{A_{x_1}}} A_{x_1}(z) z^{-1} dz \\
+		&= \frac{1}{2 \pi j} \int_{ROC_{A_{x_1}}} \left( \frac{1}{z(\alpha^2+1) - \alpha^3 - \alpha} + \frac{1}{z(-\alpha^3 - \alpha) + \alpha^2 +1} \right)dz \\
+		&= \frac{1}{2 \pi j} \left. \left( \frac{\log(\alpha - z)}{\alpha^2 + 1}  + \frac{\log(-(\alpha^2+1)(\alpha z-1))}{\alpha^3 + \alpha} \right)\right|_{\alpha}^{1/\alpha}
+	\end{align*}
+	
+	\item Two other sequences that are not equal to $x_1$ and have the same deterministic autocorrelation sequence as that of $x_1$ are its time shifted versions (with different delays).
+\end{enumerate}
 \end{enumerate}
