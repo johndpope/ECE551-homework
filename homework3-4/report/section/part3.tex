@@ -2,7 +2,16 @@
 
 \begin{enumerate}[(a)]
 %----------------------------------------------------------------------------------------------
-\item 
+\item Assume that $Z = \frac{1}{2\pi} X \circledast Y$. The inverse DTFT of $Z(\omega)$ is:
+\begin{align*}
+	z[n]
+	&= \frac{1}{2\pi} \int_{-\pi}^{\pi} Z(\omega) e^{j\omega n} d\omega \\
+	&= \frac{1}{2\pi} \int_{-\pi}^{\pi} \left( \frac{1}{2\pi} (X \circledast Y)(\omega) \right) e^{j\omega n} d\omega \\
+	&= \frac{1}{2\pi} \int_{-\pi}^{\pi} \left( \frac{1}{2\pi} \int_{-\pi}^{\pi} X(\nu)Y(\omega - \nu) d\nu \right) e^{j\omega n} d\omega \\
+	&= \frac{1}{2\pi} \int_{-\pi}^{\pi} \left( \frac{1}{2\pi} \int_{-\pi}^{\pi} X(\nu)Y(\omega - \nu) d\nu \right) e^{j\nu n} e^{j(\omega - \nu) n} d\omega \\
+	&= \frac{1}{2\pi} \int_{-\pi}^{\pi} X(\nu) e^{j\nu n} d\nu \cdot \frac{1}{2\pi} \int_{-\pi}^{\pi} Y(\omega - \nu)  e^{j(\omega - \nu) n} d(\omega - \nu) \\
+	&= x[n] y[n]
+\end{align*}
 
 %----------------------------------------------------------------------------------------------
 \item 

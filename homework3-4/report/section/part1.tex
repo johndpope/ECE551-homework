@@ -36,7 +36,16 @@ Similarly, $\sigma^{-1} x = T_{-1} x \Rightarrow (\sigma^{-1} x)[n] = x[n+1]$.
 	\end{align*}
 	Hence, $c_{x,y}[n] \neq c_{x,y}[-n]^*$.
 	
-	\item 
+	\item We have
+	\begin{align*}
+		C_{x,y}[\omega]
+		&= \sum_{n \in \mathbb{Z}} c_{x,y} e^{-j \omega n} \\
+		&= \sum_{n \in \mathbb{Z}} \left(\sum_{k \in \mathbb{Z}} x[k] y[k-n]^*\right) e^{-j \omega n} \\
+		&= \sum_{n \in \mathbb{Z}} \sum_{k \in \mathbb{Z}} x[k] y[k-n]^* e^{-j \omega (k - (k-n))} \\
+		&= \sum_{n \in \mathbb{Z}} \sum_{k \in \mathbb{Z}} x[k] y[k-n]^* e^{-j \omega k} e^{j \omega (k-n)} \\
+		&= \sum_{k \in \mathbb{Z}} x[k] e^{-j \omega k} \sum_{n \in \mathbb{Z}} y[k-n]^* \left(e^{-j \omega (k-n)}\right)^* \\
+		&= X(\omega)Y(\omega)^*
+	\end{align*}
 \end{enumerate}
 
 %----------------------------------------------------------------------------------------------
