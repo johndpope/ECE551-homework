@@ -1,0 +1,9 @@
+\begin{thebibliography}{1}
+
+\bibitem{DBLP:journals/corr/EitelSSRB15}
+Andreas Eitel, Jost~Tobias Springenberg, Luciano Spinello, Martin~A.
+  Riedmiller, and Wolfram Burgard.
+\newblock Multimodal deep learning for robust {RGB-D} object recognition.
+\newblock {\em CoRR}, abs/1507.06821, 2015.
+
+\end{thebibliography}
