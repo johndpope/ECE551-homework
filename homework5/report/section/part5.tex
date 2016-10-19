@@ -1,1 +1,66 @@
 \section{Ideal-Matched Sampling and Interpolation with Nonorthogonal Filters}\label{sec:p5}
+
+\begin{enumerate}[(a)]
+\item $N=2 \Rightarrow \omega = z^N = z^2$
+
+z-transform of $g[n]$ is
+\[G(z) = 1 +\frac{1}{2}(z^{-1}+z)\]
+Since $N=2$, we need components $z^0$ and $z^{-1}$
+\[\Rightarrow G(z) = 1 + z^{-1}\left(\frac{1}{2} + \frac{1}{2}z^2\right)\]
+
+For type-I polyphase decomposition
+\[G_p(\omega) = \vect{G_0(\omega) \\ G_1(\omega)} = \vect{1 \\ \frac{1}{2} + \frac{1}{2}\omega} \Rightarrow G_p(\omega^{-1})^\top = \vect{1, & \frac{1}{2} + \frac{1}{2}\omega^{-1}}\]
+
+From problem 4, we have
+\[\tilde{H}_p(\omega) = \left(G_p(\omega^{-1})^\top G_p(\omega)\right)^{-1} G_p(\omega^{-1})^\top\]
+\begin{align*}
+	G_p(\omega^{-1})^\top G_p(\omega)
+	&= \vect{1, & \frac{1}{2} + \frac{1}{2}\omega^{-1}} \vect{1 \\ \frac{1}{2} + \frac{1}{2}\omega} \\
+	&= 1 + \frac{1}{4}(1+\omega^{-1})(1+\omega) \\
+	&= \frac{6 + \omega + \omega^{-1}}{4}
+\end{align*}
+\[\Rightarrow \tilde{H}_p(\omega) = \left(\frac{6 + \omega + \omega^{-1}}{4}\right)^{-1} \vect{1, & \frac{1}{2} + \frac{1}{2}\omega^{-1}} \]
+
+We have 
+\begin{align*}
+	H(z) 
+	&= \tilde{H}_p(z^2) \pi(z^{-1})^\top \qquad (\text{type-II, with }z^2 = \omega)\\
+	&= \frac{4}{6 + \omega + \omega^{-1}} \vect{1, & \frac{1}{2} + \frac{1}{2}\omega^{-1}}\vect{1 \\ z} \\
+	&= \frac{4(1+\frac{z}{2} + \frac{z^{-1}}{2})}{6 + z^2 + z^{-2}} \\
+	&= \frac{2(2 + z + z^{-1})}{6 + z^2 + z^{-2}}
+\end{align*}
+
+For the numerator
+\begin{align*}
+	2(2 + z + z^{-1}) 
+	&= 2z^{-1}(2z + z^2 + 1) \\
+	&= 2z^{-1}(z+1)(z+1) \\
+	&= 2(z^{-1}+1)(z+1)
+\end{align*}
+
+For the denominator
+\begin{align*}
+	6 + z^2 + z^{-2}
+	&= z^{-2}(6z^2 + z^4 + 1) \\
+	&= z^{-2}(z^2 + 3+2\sqrt{2})(z^2 + 3-2\sqrt{2})\\
+	&= (1 + (3+2\sqrt{2})z^{-2})(z^2 + 3-2\sqrt{2})\\
+	&= (1 + (3+2\sqrt{2})z^{-2})\left(z^2 + \frac{1}{3+2\sqrt{2}}\right)\\
+	&= (3+2\sqrt{2})\left(z^{-2} + \frac{1}{3+2\sqrt{2}}\right)\left(z^2 + \frac{1}{3+2\sqrt{2}}\right)\\
+	&= \mathcal{C}^{-1}(z^{-2} + \mathcal{C})(z^2 + \mathcal{C}), \qquad \text{where } \mathcal{C}=\frac{1}{3+2\sqrt{2}}
+\end{align*}
+
+Therefore
+\begin{align*}
+	H(Z)
+	&=\frac{2(z^{-1}+1)(z+1)}{\mathcal{C}^{-1}(z^{-2} + \mathcal{C})(z^2 + \mathcal{C})} \\
+	&= 2\mathcal{C}\frac{z^{-1}+1}{z^{-2}+\mathcal{C}}\frac{z^{1}+1}{z^{2}+\mathcal{C}} \\
+	&= P(z^{-1})P(z), \qquad \text{where } P(z) = \sqrt{2\mathcal{C}}\frac{z+1}{z^2 + \mathcal{C}}, \mathcal{C} = \frac{1}{3+2\sqrt{2}}
+\end{align*}
+$h[n]$ is the inverse z-transform of $H(z)$.
+
+\item 
+\[\tilde{H}_p(\omega) G_p(\omega) = 1 \Leftrightarrow \tilde{H}_p(\omega) \vect{1 \\ \frac{1}{2}+\frac{1}{2}\omega} = 1\]
+Therefore, the shortest $\tilde{H}_p(\omega)$ is $\vect{0 & 1}$
+\[H(z) = \tilde{H}_p(z^2) \pi(z^{-1})^\top = \vect{0 & 1}\vect{1 \\ z} = 1 \]
+Hence, $h = \delta$
+\end{enumerate}

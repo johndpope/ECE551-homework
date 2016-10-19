@@ -1,1 +1,45 @@
 \section{Sampling and Interpolation for Band-Limited Vectors}\label{sec:p1}
+
+\begin{enumerate}[(a)]
+\item We have the Fourier vector
+\[w_k[n] = e^{j\frac{2\pi k n}{M}}\]
+and
+\[2\cos x = e^{jx} + e^{-jx}\]
+So
+\begin{align*}
+	x_1[n] 
+	&= 1 + \cos\left(\frac{2\pi n}{M}\right) + \cos\left(\frac{8\pi n}{M}\right) \\
+	&= w_0[n] + \frac{1}{2}\left(e^{j\frac{2\pi n}{M}} + e^{-j\frac{2 \pi n}{M}}\right) + \frac{1}{2}\left(e^{j\frac{8\pi n}{M}} + e^{-j\frac{8 \pi n}{M}}\right) \\
+	&= w_0[n] + \frac{1}{2}\left(w_1[n] + w_{-1}[n] + w_4[n] + w_{-4}[n] \right)
+\end{align*}
+Its DFT is
+\begin{align*}
+	X_1[k] 
+	&= \sum_{n=0}^{M-1} x_1[n] w_{-k}[n] \\
+	&= \frac{1}{2} \left( \sum_{n=0}^{M-1} 2w_{-k}[n] + w_{-k-1}[n] + w_{-k+1}[n] + w_{-k-4}[n] + w_{-k+4}[n]\right)
+\end{align*}
+We can see that
+\begin{align*}
+	\sum_{n=0}^{M-1} w_k[n]
+	&= \sum_{n=0}^{M-1} \exp\left(j\frac{2 \pi k}{M}\right)^n \\
+	&= \frac{1-\exp\left(j\frac{2 \pi k}{M}\right)^M}{1 - \exp\left(j\frac{2 \pi k}{M}\right)} \qquad (\because \text{geometric series}) \\
+	&= A
+\end{align*}
+Whenever the numerator of $A$ is 0 (k=0), its denominator is also 0. Therefore $A$ has a peak at $k$. Hence, $X_1[k]$ has peaks at $k=0,\pm1, \pm4$, so its bandwidth is $[-4, 4]$.
+
+Similarly,
+\begin{align*}
+	x_2[n]
+	&= \cos\left(\frac{3 \pi n}{M}\right) = \frac{1}{2}\left(e^{j\frac{3 \pi n}{M}} + e^{-j\frac{3 \pi n}{M}}\right) \\
+	\Rightarrow X_2[n]
+	&= \sum_{n=0}^{M-1} x_2[n] e^{-j\frac{2 \pi k n}{M}} \\
+	&= \frac{1}{2} \sum_{n=0}^{M-1} \left( e^{j\frac{2 \pi n}(3-2k)} + e^{j\frac{2 \pi n}(-3-2k)} \right) \\
+	&= \frac{1}{2} \left( \frac{1 - \exp\left(j\frac{\pi n}{M}(3-2k)\right)^M}{1 - \exp\left(j\frac{\pi n}{M}(3-2k)\right)} + \frac{1 - \exp\left(j\frac{\pi n}{M}(-3-2k)\right)^M}{1 - \exp\left(j\frac{\pi n}{M}(-3-2k)\right)} \right) \neq 0, \forall k \in \mathbb{Z}
+\end{align*}
+Hence, $x_2[n]$ is full-band.
+
+\item We take
+\[\Phi = \left[w_0, w_1, ..., w_{\frac{k_0+1}{2}-1}, w_{M-\frac{k_0+1}{2}+1},..., w_{M-1}\right]\]
+
+Because $x$ is band limited s.t. $X[k]=0, \forall k \in \left[\frac{k_0+1}{2}, M-\frac{k_0+1}{2}\right]$, it means that we remove the part from $\frac{k_0+1}{2}$ to $M-\frac{k_0+1}{2}$ of the DFT.
+\end{enumerate}

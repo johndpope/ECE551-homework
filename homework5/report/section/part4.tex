@@ -1,1 +1,35 @@
 \section{Pseudo-Inverse of Interpolation Filter: Single Channel Case}\label{sec:p4}
+
+By orthogonality principle
+\[x - \hat{x} \perp V = \mathrm{span}\{\sigma^{kN}g\}_{k \in \mathbb{Z}} \Leftrightarrow \innerprod{x-\hat{x}}{\sigma^{kN}g} = 0 \]
+Recall that convolution can be written as inner product, i.e. $(u*v)[n] = \innerprod{u}{\sigma^n \tilde{v}}$. Therefore
+\[\Leftrightarrow \innerprod{x-\hat{x}}{\sigma^{kN}g} = ((x-\hat{x})*\tilde{g})[kN] = 0\]
+
+Let $s = (x-\hat{x})*\tilde{g}$, its z-transform is
+\[S(z) = (X(z) - \hat{X}(x))G(z^{-1}) = 0\]
+where $X(z), \hat{X}(z)$, and $G(z^{-1})$ are the z-transform of $x[n], \hat{x}[n]$, and $\tilde{g}[n]$. We have the polyphase decomposition as
+\begin{align*}
+	X(z) &= \pi(z) X_p(z^N) \\
+	G(z) &= G_p(z^N)^\top \pi(z)^\top \\
+	\hat{X}(z) &= \pi(z) \hat{X}_p(z^N) = \pi(z) G_p(z^N)\tilde{H}_p(z^N)X_p(z^N)\\
+\end{align*}
+(because $z^N = \omega$ and $\hat{X}_p(\omega) = G_p(\omega)\tilde{H}_p(\omega)X_p(\omega)$). Substituting them to $S(z)$ gives:
+\begin{align*}
+	S(z)
+	&= \left[\pi(z)X_p(z^N) - \pi(z) G_p(z^N)\tilde{H}_p(z^N)X_p(z^N)\right]G_p(z^{-N})^\top \pi(z^{-1})^\top \\
+	&= G_p(z^{-N})^\top \pi(z^{-1})^\top \pi(z)\left[X_p(z^N) -  G_p(z^N)\tilde{H}_p(z^N)X_p(z^N)\right]
+\end{align*}
+We know that $\pi(z^{-1})^\top \pi(z) = I - A(z)$, where $A(z)$ contains non-zero phases, thus will vanish $G_p(z^{-N})^\top A(z) \left[X_p(z^N) -  G_p(z^N)\tilde{H}_p(z^N)X_p(z^N)\right]$. Therefore 
+\begin{align*}
+	S(z)
+	&= G_p(z^{-N})^\top \left[X_p(z^N) -  G_p(z^N)\tilde{H}_p(z^N)X_p(z^N)\right] \\
+	&= G_p(z^{-N})^\top X_p(z^N) - G_p(z^{-N})^\top G_p(z^N)\tilde{H}_p(z^N)X_p(z^N) \\
+	&= \left[ G_p(z^{-N})^\top - G_p(z^{-N})^\top G_p(z^N)\tilde{H}_p(z^N) \right] X_p(z^N) = 0, \forall X_p(z^N)\\
+	&\Rightarrow G_p(z^{-N})^\top - G_p(z^{-N})^\top G_p(z^N)\tilde{H}_p(z^N) = 0
+\end{align*}
+Since $\omega = z^n$
+\begin{align*}
+	&G_p(\omega^{-1})^\top - G_p(\omega^{-1})^\top G_p(\omega)\tilde{H}_p(\omega) = 0\\
+	\Leftrightarrow & G_p(\omega^{-1})^\top G_p(\omega)\tilde{H}_p(\omega) = G_p(\omega^{-1})^\top \\
+	\Leftrightarrow &\tilde{H}_p(\omega) = \left(G_p(\omega^{-1})^\top G_p(\omega)\right)^{-1} G_p(\omega^{-1})^\top
+\end{align*}
