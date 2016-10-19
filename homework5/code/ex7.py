@@ -33,7 +33,7 @@ def mse(x, x_hat):
 
 if __name__ == '__main__':
     N = 2 # downsampling / upsampling parameter
-    img = misc.imread('lena.bmp', flatten=True)
+    img = misc.imread('barbara.png', flatten=True)
     g = np.array([0.5,1.0,0.5])
 
     # part a
@@ -84,7 +84,7 @@ if __name__ == '__main__':
     plt.xlabel('(b) MSE=%.04f' % mse_b)
 
     plt.subplot(2,3,5)
-    plt.imshow(img_b, cmap='Greys_r')
+    plt.imshow(img_c, cmap='Greys_r')
     plt.xlabel('(c) MSE=%.04f' % mse_c)
 
     plt.subplot(2,3,6)
@@ -92,9 +92,11 @@ if __name__ == '__main__':
     plt.xlabel('(d) MSE=%.04f' % mse_d)
 
 
+    '''
     plt.subplot(2,3,4)
     tmp = L(img, g)
     plt.imshow(tmp, cmap='Greys_r')
     plt.xlabel('filtered with g\nMSE=%.04f' % mse(tmp,img))
+    '''
 
     plt.show()

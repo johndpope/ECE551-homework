@@ -52,7 +52,7 @@ def routine(hat_x, I, M, x_desc=''):
 if __name__ == '__main__':
     pi = np.pi
     N = 4096
-    M = 200
+    M = 5000
     I = np.arange(-N/2, N-N/2)
 
     hat_x = np.random.random(N)
