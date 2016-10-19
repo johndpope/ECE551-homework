@@ -24,8 +24,13 @@ Figure \ref{fig:p2-1} shows the results for $M=2, N=3, K=3$. After upsampling by
 \[2\pi - \frac{2\pi}{K} -\frac{2\pi}{K} = 2\pi(1-\frac{2}{K})\]
 After upsampling by $M$, the range is $[-\frac{2\pi}{KM},\frac{2\pi}{KM}]$ and the gap is $\frac{2\pi}{M} (1-\frac{2}{K})$. Therefore the first condition of $w_c$ is 
 \[\frac{2\pi}{KM} \leq w_c \leq \frac{2\pi}{KM} + \frac{2\pi}{M} (1-\frac{2}{K}) \Leftrightarrow \frac{2\pi}{KM} \leq w_c \leq \frac{2\pi}{M} (1-\frac{1}{K})\]
-After downsampling by $N$, the $[-\frac{2\pi N}{KM},\frac{2\pi N}{KM}]$ and the gap is $2\pi - \frac{2\pi N}{KM} - \frac{2\pi N}{KM} = 2\pi(1-\frac{2}{KM})$. So the second condition of $w_c$ is
-\[ \frac{2\pi N}{KM} \leq w_c \leq \frac{2\pi N}{KM} + 2\pi(1-\frac{2}{KM}) \Leftrightarrow \frac{2\pi N}{KM} \leq w_c \leq 2\pi(\frac{1}{N} - \frac{1}{KM}) \]
+After downsampling by $N$, the $[-\frac{2\pi N}{KM},\frac{2\pi N}{KM}]$ and the gap is $2\pi - \frac{2\pi N}{KM} - \frac{2\pi N}{KM} = 2\pi(1-\frac{2}{KM})$.
+
+Therefore, after upsampling by $N$, the lower bound of the first copy (after at frequency of 0) is
+\[\frac{1}{N} \cdot \frac{2\pi N}{KM} + \frac{1}{N}\cdot 2\pi(1-\frac{2N}{KM}) = \frac{2\pi}{KM} + \frac{2\pi}{N} - \frac{4\pi}{KM} = \frac{2\pi}{N} - \frac{2\pi}{KM} = 2\pi(\frac{1}{N} - \frac{1}{KM})\]
+
+So the second condition of $w_c$ is
+\[ \frac{2\pi}{KM} \leq w_c \leq 2\pi(\frac{1}{N} - \frac{1}{KM}) \]
 Combining the first and second condition gives
 \[ \frac{2\pi}{KM} \leq w_c \leq 2\pi(\frac{1}{N} - \frac{1}{KM}) \qquad (\because M<N\text{ so the second condition is tighter})\]
 \end{enumerate}

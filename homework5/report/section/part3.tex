@@ -13,11 +13,11 @@
 
 \item $x[n] = q(nT)$ is the same as downsampling by $T$, so $u[z]$ is obtained by downsampling $q(t)$ by $2T$. Therefore
 \begin{align*}
-	U(\omega) &= \frac{1}{2T} \sum_{k=0}^{2T-1} X\left(\frac{\omega-2\pi k}{2}\right) \\
+	U(\omega) &= \frac{1}{2T} \sum_{k=0}^{2T-1} Q\left(\frac{\omega-2\pi k}{2T}\right) \\
 	V(\omega) &= G(\omega)U(\omega) \\
 	Y(\omega) &= V(3\omega) \\
 	&= G(3\omega)U(3\omega) \\
-	&= \frac{G(3\omega)}{2T} \sum_{k=0}^{2T-1} X\left(\frac{3\omega-2\pi k}{2}\right)
+	&= \frac{G(3\omega)}{2T} \sum_{k=0}^{2T-1} Q\left(\frac{3\omega-2\pi k}{2T}\right)
 \end{align*}
 
 Since $q \in BL[-\frac{\pi}{T}, \frac{\pi}{T}]$ and the sampling rate $\frac{1}{T}$, we have the setting in Figure \ref{fig:p3}
