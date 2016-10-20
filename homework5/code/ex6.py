@@ -4,15 +4,25 @@ import time, ipdb
 
 
 def dtft_approx(I, hat_x, omegas):
-    X_dtft = np.exp(-1j*np.outer(omegas, I)).dot(hat_x)
-    X_dtft = np.fft.fftshift(X_dtft)
-    return X_dtft
+    X = np.exp(-1j*np.outer(omegas, I)).dot(hat_x)
+    X = np.fft.fftshift(X)
+    return X
 
 
 def eq_dtft_approx(hat_x, n0, M):
-    X_dft = np.fft.fft(hat_x, M)
-    X_dtft = np.fft.fftshift(X_dft)
-    return X_dtft
+    N = len(hat_x)
+    if M >= N:
+        L = M-N # pad to make len(hat_x) = M
+    else:
+        L = int(np.ceil(N*1.0/M)*M - N) # pad to make len(hat_x) = lowest multiple of M
+    x_pad = np.pad(hat_x, (0,L), 'constant', constant_values=0.0)
+    X = np.fft.fft(x_pad)
+
+    if len(X) > M:
+        X = X[::len(X)/M]
+
+    X = np.fft.fftshift(X)
+    return X
 
 
 def routine(hat_x, I, M, x_desc=''):
@@ -29,22 +39,25 @@ def routine(hat_x, I, M, x_desc=''):
     # part b------------------------------------------------
     print 'Approximate X(W) using DFT of hat_x...'
     start = time.time()
-    n0=0
-    X_2 = eq_dtft_approx(hat_x, n0, M)
+    X_2 = eq_dtft_approx(hat_x, I[0], M)
     duration_2 = time.time() - start
     print 'Duration: %.04f s' % duration_2
 
     plt.figure()
-    plt.subplot(3,1,1)
+    ax = plt.subplot(3,1,1)
     plt.plot(I, hat_x)
+    ax.set_xlim([I[0],I[-1]])
+    ax.set_ylim([hat_x.min()-0.1, hat_x.max()+0.1])
     plt.ylabel('hat_x (' + x_desc + ')')
 
-    plt.subplot(3,1,2)
-    plt.plot(np.linspace(-np.pi, np.pi, M), X_1)
+    ax = plt.subplot(3,1,2)
+    plt.plot(np.linspace(-np.pi, np.pi, M), np.abs(X_1))
+    ax.set_xlim([-np.pi, np.pi])
     plt.ylabel('dtft_approx')
 
-    plt.subplot(3,1,3)
-    plt.plot(np.linspace(-np.pi, np.pi, M), X_2)
+    ax = plt.subplot(3,1,3)
+    plt.plot(np.linspace(-np.pi, np.pi, M), np.abs(X_2))
+    ax.set_xlim([-np.pi, np.pi])
     plt.ylabel('eq_dtft_approx')
     return 
 
@@ -57,7 +70,7 @@ if __name__ == '__main__':
 
     hat_x = np.random.random(N)
     routine(hat_x, I, M, 'random')
-
+    
     hat_x = 5.0*np.ones(N)
     routine(hat_x, I, M, 'constant')
 
@@ -67,7 +80,7 @@ if __name__ == '__main__':
     hat_x = np.zeros(N); hat_x[N/2:] = 1
     routine(hat_x, I, M, 'unit step')
 
-    hat_x = np.sqrt(3)*(np.sin(pi*I/3))/(pi*I); hat_x[N/2]=0
+    hat_x = np.sqrt(3)*(np.sin(pi*I/3))/(pi*I); hat_x[N/2]=hat_x[N/2-1]
     routine(hat_x, I, M, 'sinc')
     
     plt.show()
