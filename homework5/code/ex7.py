@@ -62,8 +62,9 @@ if __name__ == '__main__':
     C = 1.0/(3.0+2.0*np.sqrt(2.0))
     b = [np.sqrt(C*2.0), np.sqrt(C*2.0)]
     a = [1, 0, C]
-    foo = signal.filtfilt(b, a, img)
-    img_d = L(U(D( foo , N),N), g)
+    foo = signal.filtfilt(b, a, img, axis=0)
+    bar = signal.filtfilt(b, a, foo, axis=1)
+    img_d = L(U(D( bar , N),N), g)
     mse_d = mse(img, img_d)
     print 'MSE=%.04f\n' % mse_d
     
