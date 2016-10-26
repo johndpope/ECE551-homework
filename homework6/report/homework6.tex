@@ -1,0 +1,72 @@
+\documentclass[11pt,letterpaper]{article}
+\usepackage{geometry}\geometry{left=1.5in,right=1.5in,}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{mathtools}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{enumerate}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{tikz}
+
+
+% setup commands
+\newcommand{\rank}{\mathrm{rank}}
+\newcommand{\innerprod}[2]{\left\langle #1, #2 \right\rangle}
+\newcommand{\abs}[1]{\left\lvert #1 \right\rvert}
+\newcommand{\norm}[1]{\left\lVert #1 \right\rVert}
+\newcommand{\Expect}[1]{\mathbb{E} \left[ #1 \right]}
+\newcommand{\Var}[1]{\mathrm{Var} \left( #1 \right)}
+\newcommand{\Cov}[1]{\mathrm{Cov} \left( #1 \right)}
+\newcommand{\vect}[1]{\begin{bmatrix} #1 \end{bmatrix}}
+
+
+% setup environment
+\newenvironment{proof}{\paragraph{Proof:}}{\hfill$\square$}
+
+\definecolor{codegreen}{RGB}{133,153,0}
+\definecolor{codecyan}{RGB}{42,161,152}
+\definecolor{codeblue}{RGB}{38,139,210}
+\definecolor{base1}{RGB}{147,161,161} % comment
+\definecolor{base3}{RGB}{253,246,227} % background
+\definecolor{base00}{RGB}{101,123,131} % default code
+\definecolor{base01}{RGB}{88,101,117} % optional emphasized content
+\lstdefinestyle{codestyle}{
+	backgroundcolor=\color{base3},   
+	basicstyle=\footnotesize\color{base00},
+	numberstyle=\tiny\color{base00},
+	commentstyle=\color{base1},
+	keywordstyle=\bfseries\color{codegreen},
+	stringstyle=\color{codecyan},
+	%identifierstyle=\color{codeblue},
+	breakatwhitespace=false,         
+	breaklines=true,                 
+	captionpos=b,                    
+	keepspaces=true,                 
+	numbers=left,                    
+	numbersep=5pt,                  
+	showspaces=false,                
+	showstringspaces=false,
+	showtabs=false,                  
+	tabsize=4
+}
+
+% information
+\author{Khoi-Nguyen Mac}
+\title{ECE551 - Homework 6}
+
+\begin{document}
+	\maketitle
+	
+	\input{section/part1}
+	\input{section/part2}
+	\input{section/part3}
+	\input{section/part4}
+	\input{section/part5}
+	\input{section/part6}
+
+\end{document}

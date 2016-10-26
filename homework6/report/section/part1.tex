@@ -1,0 +1,21 @@
+\section{DTFT of Auto-correlation and Cross-correlation}\label{sec:p1}
+
+\begin{align*}
+	C_{x,y}(\omega) 
+	&= \sum_{n} c_{x,y}[n]e^{-jn\omega} \\
+	&= \sum_{n} \Expect{x[n]y[n]} e^{-jn\omega} \\
+	&= \sum_{n} \Expect{x[n](x[n]+w[n])} e^{-jn\omega} \\
+	&= \sum_{n} \Expect{x[n]x[n]} e^{-jn\omega} + \sum_{n} \Expect{x[n]w[n]} e^{-jn\omega}\\
+	&= \sum_{n} a_x[n] e^{-jn\omega} \qquad (\because x[n], w[n] \text{ are uncorrelated}) \\
+	&= A_x(\omega)
+\end{align*}
+
+\begin{align*}
+	A_y(\omega)
+	&= \sum_{n} a_{y}[n]e^{-jn\omega} \\
+	&= \sum_{n} \Expect{y[n]y[n]} e^{-jn\omega} \\
+	&= \sum_{n} \Expect{(x[n]+w[n])(x[n]+w[n])} e^{-jn\omega} \\
+	&= \sum_{n} \Expect{x[n]x[n]} e^{-jn\omega} + \sum_{n} \Expect{w[n]w[n]} e^{-jn\omega} + \sum_{n} 2\Expect{x[n]w[n]} e^{-jn\omega}\\
+	&= \sum_{n} \Expect{x[n]x[n]} e^{-jn\omega} + \sum_{n} \Expect{w[n]w[n]} e^{-jn\omega} \\
+	&= A_x(\omega) + A_w(\omega)
+\end{align*}
