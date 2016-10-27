@@ -4,8 +4,9 @@ import matplotlib.pyplot as plt
 from scipy import signal
 
 def probabilistic_Wiener(L, alpha):
-    num = [1,-0.5]; den = [0, -alpha, 1]
-    #a_x = signal.filtfilt(num, den
+    num = [0,1,-0.5]; den = [1,-alpha]
+    dirac = np.zeros(10); dirac[0] = 1
+    a_x = signal.filtfilt(num, den, dirac)
 
     Rx = 0
     Rxd = 0
@@ -41,12 +42,13 @@ def LMS(x, L, mu):
         X = x[n-L:n]
         d = x[n]
         e = d - w.dot(X)
-        regularizer = 1e-4*np.linalg.norm(e)**2
-        w += mu*(e*X + regularizer)
-        if np.any(np.isnan(w)) or np.any(np.isinf(w)):
-            ipdb.set_trace()
+        regularizer = -1e-4*np.linalg.norm(w)**2
+        w_new = w + mu*(e*X + regularizer)
+        if np.any(np.isnan(w_new)) or np.any(np.isinf(w_new)):
+            print 'inf or nan'
+            break
+        w = w_new
             
-    ipdb.set_trace()
     x_est = signal.convolve(x, w, mode='same')
     return w, x_est
 
@@ -66,9 +68,14 @@ if __name__ == '__main__':
 
         # plot
         plt.figure()
-        plt.plot(x, 'k')
-        plt.plot(x_stat, 'g')
-        plt.plot(x_lms, 'b')
-        ipdb.set_trace()
+        plt.plot(x, 'k', label='original')
+        plt.plot(x_stat, 'g', label='statistical')
+        plt.plot(x_lms, 'b', label='LMS')
+        plt.grid('on')
+        plt.legend()
+        plt.title('alpha=%.1f, L=%d' % (alpha, L))
+
         print 'Estimated Wiener error: %.4f' % np.linalg.norm(w_stat - w_opt)
+        print 'Estimated LMS error: %.4f' % np.linalg.norm(w_hat - w_opt)
+        print '\n'
     plt.show()
