@@ -3,10 +3,56 @@
 \begin{enumerate}[(a)]
 \item
 \[x_1[n] = \begin{cases}A & \text{even } n \\ B & \text{odd } n \end{cases}\]
+Half of the sequence is $A$ and the other half is $B$, so $\Expect{x_1[n]} = \Expect{\frac{A+B}{2}} = 0$ is a constant. \[a_{x_1}[n_1,n_2] = \Expect{x_1[n_1]x_1[n_2]} = \begin{cases}
+\Expect{A^2} = 1 & n_1, n_2 \text{ even}\\
+\Expect{B^2} = 1 & n_1, n_2 \text{ odd}\\
+\Expect{AB} = 0 \quad (A, B \text{ uncorrelated}) & \text{else}
+\end{cases}\]
+We have $x_1[0]=A$, so
+\[a_{x_1}[0,n1-n_2] = \Expect{x_1[0]x_1[n_1-n_2]} = \begin{cases}
+\Expect{A^2} = 1 & \text{both odd or even} \\
+\Expect{AB} = 0  & \text{one odd, one even} \\
+\end{cases}\]
+$a_{x_1}[n_1,n_2] = a_{x_1}[0,n_1-n_2]$, so $x_1[n]$ is WSS. Since its values keep alternating between $A$ and $B$, it is periodic.
 
+\[x_2[n] = \begin{cases}A & n \geq 0 \\ B & n < 0 \end{cases}\]
+Similarly, $\Expect{x_2[n]} = \Expect{\frac{A+B}{2}}=0$. We have
+\[a_{x_2}[n_1,n_2] = \Expect{x_2[n_1]x_1[n_2]} = \begin{cases}
+\Expect{A^2} = 1 & n_1, n_2 \geq 0\\
+\Expect{B^2} = 1 & n_1, n_2 <0\\
+\Expect{AB} = 0 & \text{else}
+\end{cases}\]
+and 
+\[a_{x_1}[0,n1-n_2] = \Expect{x_1[0]x_1[n_1-n_2]} = \begin{cases}
+\Expect{A^2} = 1 & n_1 \geq n_2 \\
+\Expect{AB} = 0 & n_1 < n_2
+\end{cases}\]
+$a_{x_2}[n_1,n_2] \neq a_{x_2}[0,n_1-n_2]$, so $x_2[n]$ is not WSS. $x_2 = B$ on the negative side and $A$ on the positive side, so it is not periodic.
+
+\[\begin{cases}x_3[n+1] = \frac{1}{2}x_3[n] + A \\ x_3[0] = A \end{cases}\]
+We can see that
+\begin{align*}
+	x_3[0] &= A \\
+	x_3[1] &= \frac{1}{2}A + A \\
+	x_3[2] &= \frac{1}{2}\left(\frac{1}{2}A + A\right) + A \\
+	x_3[3] &= \frac{1}{2}\left(\frac{1}{2}\left(\frac{1}{2}A + A\right) + A\right) + A \\
+	\cdots\\
+	\Rightarrow x_3[n] &= A \sum_{i=0}^{n}\left(\frac{1}{2}\right)^i
+\end{align*}
+By geometric series
+\[x_3[n] = A \frac{1-\left(\frac{1}{2}\right)^{n+1}}{1 - \frac{1}{2}} = 2A(1 - 2^{-n-1})\]
+So
+\[\Expect{x_3[n]} = 2(1-2^{-n-1}) \Expect{A} = 0\]
+We have
+\[a_{x_3}[n_1,n_2] = \Expect{x_3[n_1]x_3[n_2]} = 2(1-2^{-n_1-1})(1-2^{-n_2-1})\Expect{A^2} = 2(1-2^{-n_1-1})(1-2^{-n_2-1})\]
+and
+\[a_{x_3}[0,n_1-n_2] = \Expect{x_3[0]x_3[n_1-n_2]} = 2(1-2^{-n_1+n_2-1})\Expect{A^2} = 2(1-2^{-n_1+n_2-1})\]
+$a_{x_3}[n_1,n_2] \neq a_{x_3}[0,n_1-n_2]$, so $x_2[n]$ is not WSS.
+
+\item
+\[x_1[n] = \begin{cases}A & \text{even } n \\ B & \text{odd } n \end{cases}\]
 
 \[x_2[n] = \begin{cases}A & n \geq 0 \\ B & n < 0 \end{cases}\]
 
 \[\begin{cases}x_3[n+1] = \frac{1}{2}x_3[n] + A \\ x_3[0] = A \end{cases}\]
-\item
 \end{enumerate}
