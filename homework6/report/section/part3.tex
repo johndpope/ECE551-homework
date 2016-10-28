@@ -1,5 +1,29 @@
 \section{Adaptive Filter and LMS}\label{sec:p3}
 
 \begin{enumerate}[(a)]
+\item We are given the model $\Expect{x[0]x[m]} = 2^{-\abs{m}} + 4^{-\abs{m}} = a_x[m]$, therefore we can use probabilistic cost function for this problem.
+\[C(w) = \gamma_d - 2w^\top R_{xd} + w^\top R_x w\]
+
+\item 
+\begin{align*}
+	R_x
+	&= \Expect{X[n] X[n]^\top} \\
+	&= \vect{
+		a_x[0] & a_x[1] & a_x[2] & \cdots & a_x[L-1] \\
+		a_x[1] & a_x[0] & a_x[1] & \cdots & a_x[L-2] \\
+		a_x[2] & a_x[1] & a_x[0] & \cdots & a_x[L-3] \\
+		\vdots & \vdots & \vdots & \ddots & \vdots \\
+		a_x[L-1] & a_x[L-2] & a_x[L-3] & \cdots & a_x[0]
+		}
+\end{align*}
+
+For $L \geq 3$,
+
+For $L = 2$
+
+For $L = 1$
+
+\item
+
 \item 
 \end{enumerate}

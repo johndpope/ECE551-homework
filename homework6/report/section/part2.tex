@@ -40,19 +40,27 @@ We can see that
 	\Rightarrow x_3[n] &= A \sum_{i=0}^{n}\left(\frac{1}{2}\right)^i
 \end{align*}
 By geometric series
-\[x_3[n] = A \frac{1-\left(\frac{1}{2}\right)^{n+1}}{1 - \frac{1}{2}} = 2A(1 - 2^{-n-1})\]
+\[x_3[n] = A \frac{1-\left(\frac{1}{2}\right)^{n+1}}{1 - \frac{1}{2}} = 2A(1 - 2^{-n-1}) = A(2 - 2^{-n})\]
 So
-\[\Expect{x_3[n]} = 2(1-2^{-n-1}) \Expect{A} = 0\]
+\[\Expect{x_3[n]} = (2-2^{-n-1}) \Expect{A} = 0\]
 We have
-\[a_{x_3}[n_1,n_2] = \Expect{x_3[n_1]x_3[n_2]} = 2(1-2^{-n_1-1})(1-2^{-n_2-1})\Expect{A^2} = 2(1-2^{-n_1-1})(1-2^{-n_2-1})\]
+\[a_{x_3}[n_1,n_2] = \Expect{x_3[n_1]x_3[n_2]} = (2-2^{-n_1})(2-2^{-n_2})\Expect{A^2} = (2-2^{-n_1})(2-2^{-n_2})\]
 and
-\[a_{x_3}[0,n_1-n_2] = \Expect{x_3[0]x_3[n_1-n_2]} = 2(1-2^{-n_1+n_2-1})\Expect{A^2} = 2(1-2^{-n_1+n_2-1})\]
-$a_{x_3}[n_1,n_2] \neq a_{x_3}[0,n_1-n_2]$, so $x_2[n]$ is not WSS.
+\[a_{x_3}[0,n_1-n_2] = \Expect{x_3[0]x_3[n_1-n_2]} = (2-2^{-n_1+n_2})\Expect{A^2} = (2-2^{-n_1+n_2})\]
+$a_{x_3}[n_1,n_2] \neq a_{x_3}[0,n_1-n_2]$, so $x_2[n]$ is not WSS. Since $x_3[n]$ is a geometric series, it is not periodic.
 
 \item
 \[x_1[n] = \begin{cases}A & \text{even } n \\ B & \text{odd } n \end{cases}\]
+We can see that $x_1[n+1]$ only depends on $x_1[n-1]$ as the values alternate between $A$ and $B$. Therefore, $w = \vect{0\\1}$ and prediction error is 0.
 
 \[x_2[n] = \begin{cases}A & n \geq 0 \\ B & n < 0 \end{cases}\]
+If $n \neq -1$ then $x_2[n+1] = x_2[n]$ and there is no prediction error. If $n = -1$ then the prediction error is $\Expect{x_2[0] \mid x_2[-1], x_2[-2]}$. Since $x_2[0] = A$, $x_2[-1] = x_2[-2] = B$, and $A$ and $B$ are independent, $\Expect{x_2[0] \mid x_2[-1], x_2[-2]} = \Expect{A} = 0$. Hence, $w = \vect{1\\0}$ and prediction error is 0.
 
 \[\begin{cases}x_3[n+1] = \frac{1}{2}x_3[n] + A \\ x_3[0] = A \end{cases}\]
+We have
+\begin{align*}
+	&x_3[n+1] - x_3[n] = \half x_3[n] - \half x_3[n-1]\\
+	\Leftrightarrow & x_3[n+1] = \frac{3}{2} x_3[n] - \half x_3[n-1]
+\end{align*}
+Hence, $w = \vect{\frac{3}{2} \\ -\half}$ and prediction error is 0.
 \end{enumerate}
