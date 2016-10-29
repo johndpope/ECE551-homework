@@ -42,8 +42,9 @@ def LMS(x, L, mu):
         X = x[n-L:n]
         d = x[n]
         e = d - w.dot(X)
-        regularizer = -1e-4*np.linalg.norm(w)**2
-        w_new = w + mu*(e*X + regularizer)
+        w_new = w + mu*e*X
+        #regularizer = -1e-4*np.linalg.norm(w)**2
+        #w_new = w + mu*(e*X + regularizer)
         if np.any(np.isnan(w_new)) or np.any(np.isinf(w_new)):
             print 'inf or nan'
             break
@@ -63,7 +64,7 @@ if __name__ == '__main__':
 
         #x_prob = # filter x using w_opt
         x_stat = signal.convolve(x, w_stat, mode='same') # filter x using w_stat
-        mu = 1e-4
+        mu = 1e-6
         w_hat, x_lms = LMS(x, L, mu)
 
         # plot

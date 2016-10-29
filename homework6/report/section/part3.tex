@@ -2,9 +2,9 @@
 
 \begin{enumerate}[(a)]
 \item We are given the model $\Expect{x[0]x[m]} = 2^{-\abs{m}} + 4^{-\abs{m}} = a_x[m]$, therefore we can use probabilistic cost function for this problem.
-\[C(w) = \gamma_d - 2w^\top R_{xd} + w^\top R_x w\]
 
 \item 
+In general
 \begin{align*}
 	R_x
 	&= \Expect{X[n] X[n]^\top} \\
@@ -16,14 +16,89 @@
 		a_x[L-1] & a_x[L-2] & a_x[L-3] & \cdots & a_x[0]
 		}
 \end{align*}
+and the cost function
+\[C(w) = \Expect{\abs{e[n]}^2}\]
+where $e[n] = y[n] - d[n]$ is the prediction error, $y[n]$ is the prediction, and $d[n]$ is the reference.
+
+Let $X[n] = \vect{x[n] & x[n-1] & x[n-2] & x[n-3] & \cdots & x[n-L+1]}^\top$.
 
 For $L \geq 3$,
+\begin{align*}
+	y[n] &= w^\top X[n] \\
+	d[n] &= \alpha_1 x[n-1] + \alpha_2 x[n-2] = \vect{0 & \alpha_1 & \alpha_2 & 0 & \cdots & 0} X[n] = A^\top X[n] \\
+	\Rightarrow e[n] &= y[n] - d[n] = (w - A)^\top X[n]
+\end{align*}
+The cost function is
+\[C(w) = \Expect{\abs{e[n]}^2} = (w-A)^\top R_x (w-A)\]
+Therefore, $\min C(w) = 0$ for $w = A$. Hence, $w_{opt} = \vect{0 & \alpha_1 & \alpha_2 & 0 & \cdots & 0}$
 
 For $L = 2$
+\[R_x = \vect{a_x[0] & a_x[1] \\ a_x[1] & a_x[0]} = \vect{2 & \frac{3}{4} \\ \frac{3}{4} & 2}\]
+\begin{align*}
+	R_{xd}
+	&= \Expect{X[n]d[n]} \\
+	&= \Expect{\vect{x[n] \\ x[n-1]}(\alpha_1 x[n-1] + \alpha_2 x[n-2])} \\
+	&= \vect{\alpha_1\Expect{x[n]x[n-1]} + \alpha_2\Expect{x[n]x[n-2]} \\ \alpha_1\Expect{x[n-1]x[n-1]} + \alpha_2\Expect{x[n-1]x[n-2]}} \\
+	&= \vect{\alpha_1 a_x[1] + \alpha_2 a_x[2] \\ \alpha_1 a_x[0] + \alpha_2 a_x[1]} \\
+	&= \vect{\frac{3}{4}\alpha_1 + \frac{5}{16}\alpha_2 \\ 2\alpha_1 + \frac{3}{4}\alpha_2}
+\end{align*}
+
+\begin{align*}
+	\gamma_d 
+	&= \Expect{d[n]^2} \\
+	&= \alpha_1^2 \Expect{x[n-1]x[n-1]} + \alpha_2^2 \Expect{x[n-2]x[n-2]} + 2\alpha_1 \alpha_2 \Expect{x[n-1]x[n-2]} \\
+	&= \alpha_1^2 a_x[0] + \alpha_2^2 a_x[0] + 2\alpha_1 \alpha_2 a_x[1] \\
+	&= 2(\alpha_1^2 + \alpha_2^2) + \frac{3}{2} \alpha_1 \alpha_2
+\end{align*}
+\[C(w) = \gamma_d -2 w^\top R_{xd} + w^\top R_x w\]
+\begin{align*}
+	w_{opt} 
+	&= R_x^{-1}R_{xd} = \frac{4}{55} \vect{8 & -3 \\ -3 & 8} \vect{\frac{3}{4}\alpha_1 + \frac{5}{16}\alpha_2 \\ 2\alpha_1 + \frac{3}{4}\alpha_2} \\
+	&= \frac{4}{55} \vect{\frac{1}{4}\alpha_2 \\ \frac{55}{4}\alpha_1 + \frac{81}{16}\alpha_2} = \vect{\frac{1}{55}\alpha_1 \\ \alpha_1 + \frac{81}{220}\alpha_2}
+\end{align*}
 
 For $L = 1$
+\begin{align*}
+	R_x &= a_x[0] = 2 \\
+	R_{xd} &= \alpha_1 a_x[1] + \alpha_2 a_x[2] = \frac{3}{4}\alpha_1 + \frac{5}{16}\alpha_2 \\
+	\gamma_d &= 2(\alpha_1^2 + \alpha_2^2) + \frac{3}{2} \alpha_1 \alpha_2 \\
+	C(w) &= \gamma_d -2 w^\top R_{xd} + w^\top R_x w \\
+		&= 2(\alpha_1^2 + \alpha_2^2) + \frac{3}{2} \alpha_1 \alpha_2 - \left(\frac{3}{2} \alpha_1 + \frac{5}{8} \alpha_2\right) w + 2w^2 \\
+	w_{opt} &= R_x^{-1}R_{xd} = \frac{3}{8}\alpha_1 + \frac{5}{32}\alpha_2
+\end{align*}
 
-\item
+\item The gradient of selected cost
+\begin{align*}
+	\nabla_w C(\hat{w}) 
+	&= \nabla_w \Expect{\abs{e[n]}^2} \\
+	&= \Expect{2 e[n] \nabla_w e[n]} & (\text{chain rule})\\
+	&= -2\Expect{e[n]X[n]} &(\nabla_w e[n] = -X[n])
+\end{align*}
+The gradient descent update equation (with $\mu$ as the learning rate)
+\[\hat{w}[n+1] = \hat{w}[n] -\half \mu \nabla_w C(\hat{w}[n]) = \hat{w}[n] + \mu \Expect{e[n]X[n]}\]
+converges to a local minimum if $C(w)$ is strictly convex ($R_x$ is invertible) and differentiable. Indeed, if $\hat{w}[n] \rightarrow \hat{w}$ converges then $\hat{w}[n+1]$ to the same limit, the gradient equation becomes
+\[\hat{w}= \hat{w} - \half \mu \nabla_w C(\hat{w}) \Rightarrow \nabla_W C(\hat{w}) = 0\]
+which is a characterization of a local minimum of $C(w)$.
 
-\item 
+\item In LMD, we assume that $\Expect{e[n]X[n]} \approx e[n]X[n]$. Therefore, the LMS update equations are
+\begin{align*}
+	e[n] &= d[n] - \hat{w}[n]^\top X[n] \\
+	\hat{w}[n+1] &= \hat{w}[n] + \mu X[n] e[n]
+\end{align*}
+We have
+\[\nabla_w C(\hat{w}) = -2 \Expect{X[n](d[n]-\hat{X}[n]^\top\hat{w})} = -w(R_{xd} - R_x\hat{w})\]
+so that the ideal iterations are
+\[\hat{w}[n+1] = (I - \mu R_x) \hat{w}[n] + \mu R_{xd}\]
+This is a linear difference equation in the vector $\hat{w}[n]$. Such difference equation has a convergent solution iff the eigenvalues of $I - \mu R_x$ are contained in the unit circle. The eigenvalues of $I - \mu R_x$ are given by
+\[\lambda_k = 1 - \mu \psi_k, \qquad k = 1, \cdots, L\]
+where $\psi_1 < \psi_2 \leq \cdots \leq \psi_L$ are the eigenvalues of $R_x$, sorted by increasing order. We want 
+\begin{align*}
+	& -1 < \lambda_k < 1\\
+	\Leftrightarrow& -1 < 1 - \mu \psi_k < 1 \\
+	\Leftrightarrow& 1 > \mu \psi_k -1 > -1 \\
+	\Leftrightarrow& 0 < \mu \psi_k <2 \\
+	\Rightarrow& 0 < \mu < \frac{2}{\psi_L}
+\end{align*}
+where $\psi_L$ is the largest eigenvalue of $R_x$. Since $tr(R_x) = \sum_{k=1}^{L}\psi_k \geq \psi_L$
+\[0 < \mu < \frac{2}{tr(R_x)}\]
 \end{enumerate}
