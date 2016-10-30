@@ -20,9 +20,15 @@ def probabilistic_Wiener(L, alpha):
     row = np.zeros(L)
     for n in range(L):
         row[n] = a_x(n, alpha)
-    ipdb.set_trace()
-    Rx = 0
-    Rxd = 0
+
+    Rx = zeros((L,L))
+    for n in range(L):
+        Rx[n] = np.roll(row,n)
+    Rx = np.triu(Rx)
+    Rx += Rx.T
+
+    Rxd = np.zeros(L)
+
     w_opt = 0
     return w_opt
 

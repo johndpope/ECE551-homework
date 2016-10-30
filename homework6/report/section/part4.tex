@@ -27,6 +27,19 @@ and
 Therefore, the update equation is
 \[\hat{w}[n+1] = \hat{w}[n] - \half \mu \nabla C_{reg}(w) = \hat{w}[n] + \mu\left(X[n]e[n] - \frac{\lambda}{2} \norm{w}^2 \right)\]
 
-\item
-
+\item We have
+\begin{align*}
+	a_x[k] &= \frac{3}{4} + \frac{1}{4}(-1)^k \\
+	\Rightarrow a_x[k] &= \begin{cases}1 & k \text{ even} \\ \half & k \text{ odd}\end{cases}
+\end{align*}
+For $L=3$
+\[R_x = \vect{a_x[0] & a_x[1] & a_x[2] \\ a_x[1] & a_x[0] & a_x[1] \\ a_x[2] & a_x[1] & a_x[0]} = \vect{1 & \half & 1 \\ \half & 1 & \half \\ 1 & \half & 1}\]
+For one step prediction, $d[n] = x[n+1]$, therefore
+\[R_{xd} = \vec{a_x[1] \\ a_x[2] \\ a_x[3]} = \vect{\half \\ 1 \\ \half}\]
+Wiener filter of $x$ is $w_{opt} = R_x^{-1} R_{xd}$. However, $R_x$ is singular. We can use the pseudo-inverse of $R_x$ instead, i.e. 
+\[R_x^\dagger = \vect{\frac{1}{3} & -\frac{1}{3} & \frac{1}{3} \\ -\frac{1}{3} & \frac{4}{3} & -\frac{1}{3} \\ \frac{1}{3} & -\frac{1}{3} & \frac{1}{3}}\]
+\[w_p = R_x^\dagger R_{xd} = \vect{0 \\ 1 \\ 0}\]
+With $\lambda = 0.1$
+\[R_x + \lambda I = \vect{1.1 & 0.5 & 1 \\ 0.5 & 1.1 & 0.5 \\ 1 & 0.5 & 1.1}\]
+\[w_l = (R_x + \lambda I)^{-1} R_{xd} \approx \vect{0.0276 \\ 0.8840 \\ 0.0276}\]
 \end{enumerate}
