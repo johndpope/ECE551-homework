@@ -1,13 +1,26 @@
 import numpy as np
-import ipdb
+import ipdb, os
 import matplotlib.pyplot as plt
 from scipy import signal
 
-def probabilistic_Wiener(L, alpha):
-    num = [0,1,-0.5]; den = [1,-alpha]
-    dirac = np.zeros(10); dirac[0] = 1
-    a_x = signal.filtfilt(num, den, dirac)
+def a_x(n, alpha):
+    if alpha == 0:
+        return 0
 
+    if n <= 0:
+        return 0.5 / alpha*1.0
+    
+    num = 0.5*((alpha-2.5)*alpha+1) * alpha**(-n-1) * (alpha**(2*n)-1)
+    den = alpha**2 - 1
+    res = num/den
+    return res
+
+
+def probabilistic_Wiener(L, alpha):
+    row = np.zeros(L)
+    for n in range(L):
+        row[n] = a_x(n, alpha)
+    ipdb.set_trace()
     Rx = 0
     Rxd = 0
     w_opt = 0
@@ -56,7 +69,7 @@ def LMS(x, L, mu):
 
 if __name__ == '__main__':
     N = 500
-    cases = [(alpha, L) for alpha in [0, 0.9] for L in [2,4,7]]
+    cases = [(alpha, L) for alpha in [0.0, 0.9] for L in [2,4,7]]
     for alpha,L in cases:
         x = gen_x(alpha, N)
         w_opt = probabilistic_Wiener(L, alpha)

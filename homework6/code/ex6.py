@@ -32,7 +32,7 @@ if __name__ == '__main__':
     # setup parameters 
     min_mse = sys.maxsize
     best_w, best_L, best_x_est = 0, 0, 0
-    mu = 1e-5
+    mu = 1e-6
     
     stale_count = 0
     tolerance = 1e-5

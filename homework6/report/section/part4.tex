@@ -1,13 +1,31 @@
 \section{Regularized Wiener Filter and Leaky LMS}\label{sec:p4}
 
 \begin{enumerate}[(a)]
-\item
+\item We want to solve $w$ for \[R_x w = R_{xd}\]
+If $R_x$ is singular, it is not invertible and therefore LMS will diverge.
 
-\item 
+\item To avoid singularity, we can add a regularization term to the cost function, i.e.
+\begin{align*}
+	C(w) 
+	&= \Expect{\abs{e[n]}^2} + \lambda\norm{w}^2 \\
+	&= w^\top R_x w - 2 w^\top R_{xd} + \gamma_d + \lambda w^\top w \\
+	&= w^\top (R_x + \lambda I) w - 2 w^\top R_{xd} + \alpha
+\end{align*}
+Therefore, the gradient is
+\[\nabla C(w) = 2\left((R_x + \lambda I)w - R_{xd}\right)\]
+and 
+\[ (R_x + \lambda I)w = R_{xd} \Rightarrow w_{opt} = (R_x + \lambda I)^{-1} R_{xd}\]
 
-\item
+\item If $R_x$ is singular, its eigenvalues are zero. By adding $\lambda$, we can shift the eigenvalues to $\lambda$ to have it invertible, where the inverse is unique.
 
-\item
+\item For leaky LMS, we simply add the regularization term to the cost function, i.e. 
+\begin{align*}
+	C_{reg}(w) &= C(w) + \lambda \norm{w}^2 \\
+	\Rightarrow \nabla C_{reg}(w) &= \nabla C(w) + \lambda \norm{w}^2 \\
+	&\approx -2X[n]e[n] + \lambda \norm{w}^2
+\end{align*}
+Therefore, the update equation is
+\[\hat{w}[n+1] = \hat{w}[n] - \half \mu \nabla C_{reg}(w) = \hat{w}[n] + \mu\left(X[n]e[n] - \frac{\lambda}{2} \norm{w}^2 \right)\]
 
 \item
 
