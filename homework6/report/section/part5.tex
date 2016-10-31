@@ -35,7 +35,7 @@ Let $g[\cdot]$ be the inverse z-transform of $G(z)$. We see that $g[0]$ is the s
 In general
 \[g[k] = \sum_{m \geq 0} \alpha^{2m+k}\]
 Therefore
-\[a_x[k] = \sum_{m \geq 0} (1.25 \alpha^{2m+k} - 0.5 \alpha^{2m+k+1} - 0.5 \alpha^{2m+k-1})\]
+\[a_x[k] = \sum_{m > 0} (1.25 \alpha^{2m+k} - 0.5 \alpha^{2m+k+1} - 0.5 \alpha^{2m+k-1})\]
 
 \item Figure \ref{fig:p5-1}-\ref{fig:p5-6} show the results of different approaches with varied choices of $\alpha$ and $L$ (in Figure \ref{fig:p5-2}, LMS result is almost the same as original signal, due to scaling). Overall, LMS approach has the best result and probabilistic approach does not work well with $\alpha = 0$. Moreover, larger $L$ also gives better approximation.
 \begin{figure}[htbp]
