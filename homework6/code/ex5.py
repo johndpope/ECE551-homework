@@ -3,16 +3,10 @@ import ipdb, os
 import matplotlib.pyplot as plt
 from scipy import signal
 
-def a_x(n, alpha):
-    if alpha == 0:
-        return 0
-
-    if n <= 0:
-        return 0.5 / alpha*1.0
-    
-    num = 0.5*((alpha-2.5)*alpha+1) * alpha**(-n-1) * (alpha**(2*n)-1)
-    den = alpha**2 - 1
-    res = num/den
+def a_x(k, alpha):
+    res = 0
+    for m in range(1,100):
+        res += 1.25*alpha**(2*m+k) - 0.5*alpha**(2*m+k+1) - 0.5*alpha**(2*m+k-1)
     return res
 
 
@@ -21,15 +15,17 @@ def probabilistic_Wiener(L, alpha):
     for n in range(L):
         row[n] = a_x(n, alpha)
 
-    Rx = zeros((L,L))
+    Rx = np.zeros((L,L))
     for n in range(L):
         Rx[n] = np.roll(row,n)
     Rx = np.triu(Rx)
     Rx += Rx.T
 
     Rxd = np.zeros(L)
+    Rxd[:L-1] = row[1:]
+    Rxd[L-1] = a_x(L, alpha)
 
-    w_opt = 0
+    w_opt = np.linalg.pinv(Rx).dot(Rxd)
     return w_opt
 
 
@@ -81,7 +77,7 @@ if __name__ == '__main__':
         w_opt = probabilistic_Wiener(L, alpha)
         w_stat = statistical_Wiener(L, x)
 
-        #x_prob = # filter x using w_opt
+        x_prob = signal.convolve(x, w_opt, mode='same') # filter x using w_opt
         x_stat = signal.convolve(x, w_stat, mode='same') # filter x using w_stat
         mu = 1e-6
         w_hat, x_lms = LMS(x, L, mu)
@@ -89,6 +85,7 @@ if __name__ == '__main__':
         # plot
         plt.figure()
         plt.plot(x, 'k', label='original')
+        plt.plot(x_prob, 'r', label='probabilistic')
         plt.plot(x_stat, 'g', label='statistical')
         plt.plot(x_lms, 'b', label='LMS')
         plt.grid('on')
@@ -98,4 +95,5 @@ if __name__ == '__main__':
         print 'Estimated Wiener error: %.4f' % np.linalg.norm(w_stat - w_opt)
         print 'Estimated LMS error: %.4f' % np.linalg.norm(w_hat - w_opt)
         print '\n'
+
     plt.show()

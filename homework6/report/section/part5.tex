@@ -21,15 +21,65 @@ Since $A_s(z) = 1$,
 	A_x(z)
 	&= H(z)H(z^{-1}) \\
 	&= \frac{1 - 0.5 z^{-1}}{z - \alpha} \frac{1 - 0.5 z}{z^{-1} - \alpha} \\
-	&= \frac{0.5z - 1.25 +0.5z^{-1}}{\alpha z - (1+\alpha^2) +\alpha z^{-1}} \\
-	&= \frac{0.5z^2 - 1.25z +0.5}{\alpha z^2 - (1+\alpha^2)z +\alpha} \\
-	\Rightarrow a_x[n]
-	&= \frac{0.25(2\alpha^2 - 5\alpha +2)(\alpha^{2n}-1)\alpha^{-n-1}(1-\theta(-n))}{\alpha^2 - 1} + \frac{0.5\theta(-n)}{\alpha}
+	&= (1.25 - 0.5z - 0.5z^{-1})\frac{1}{1 - \alpha z + \alpha z^{-1} - \alpha^2}\\
+	&= (1.25 - 0.5z - 0.5z^{-1})\frac{1}{1 - \alpha z}\frac{1}{1 - \alpha z^{-1}}
 \end{align*}
-where $\theta(n)$ is the Heaviside step function. Therefore
-\[a_x[n] = \begin{cases}
-\frac{0.5}{\alpha} & n \leq 0 \\
-\frac{0.5((\alpha-2.5)\alpha+1)\alpha^{-n-1}(\alpha^{2n}-1)}{\alpha^2 - 1} & \text{else}
-\end{cases}\]
+Let $P(z) = 1.25 - 0.5z - 0.5z^{-1}$ and $G(z) = \frac{1}{1 - \alpha z}\frac{1}{1 - \alpha z^{-1}}$. We notice that, by geometric series
+\[\frac{1}{1 - \alpha z} = \sum_{m=0}^{\infty}(\alpha z)^n\]
+\[\frac{1}{1 - \alpha z^{-1}} = \sum_{m=0}^{\infty}\alpha^m z^{-m}\]
+Therefore
+\[G(z) = \sum_{m \geq 0, n \geq 0} \alpha^{n+m} z^{n-m}\]
+
+Let $g[\cdot]$ be the inverse z-transform of $G(z)$. We see that $g[0]$ is the sum subject to $n - m = 0 \Leftrightarrow n = m$, i.e.
+\[g[0] = \sum_{m \geq 0} \alpha^{n+m} = \sum_{m \geq 0} \alpha^{2m}\]
+In general
+\[g[k] = \sum_{m \geq 0} \alpha^{2m+k}\]
+Therefore
+\[a_x[k] = \sum_{m \geq 0} (1.25 \alpha^{2m+k} - 0.5 \alpha^{2m+k+1} - 0.5 \alpha^{2m+k-1})\]
+
+\item Figure \ref{fig:p5-1}-\ref{fig:p5-6} show the results of different approaches with varied choices of $\alpha$ and $L$ (in Figure \ref{fig:p5-2}, LMS result is almost the same as original signal, due to scaling). Overall, LMS approach has the best result and probabilistic approach does not work well with $\alpha = 0$. Moreover, larger $L$ also gives better approximation.
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=0.8\textwidth]{images/p5-1}
+	\caption{$\alpha=0, L=2$.}
+	\label{fig:p5-1}
+\end{figure}
+
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=0.8\textwidth]{images/p5-2}
+	\caption{$\alpha=0, L=4$.}
+	\label{fig:p5-2}
+\end{figure}
+
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=0.8\textwidth]{images/p5-3}
+	\caption{$\alpha=0, L=7$.}
+	\label{fig:p5-3}
+\end{figure}
+
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=0.8\textwidth]{images/p5-4}
+	\caption{$\alpha=0.9, L=2$.}
+	\label{fig:p5-4}
+\end{figure}
+
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=0.8\textwidth]{images/p5-5}
+	\caption{$\alpha=0.9, L=4$.}
+	\label{fig:p5-5}
+\end{figure}
+
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=0.8\textwidth]{images/p5-6}
+	\caption{$\alpha=0.9, L=7$.}
+	\label{fig:p5-6}
+\end{figure}
 
 \end{enumerate}
+
+\newpage
