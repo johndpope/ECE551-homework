@@ -4,9 +4,9 @@ import matplotlib.pyplot as plt
 from scipy import signal
 
 def a_x(k, alpha):
-    res = 0
-    for m in range(1,100):
-        res += 1.25*alpha**(2*m+k) - 0.5*alpha**(2*m+k+1) - 0.5*alpha**(2*m+k-1)
+    if k == 0 and alpha == 0:
+        return 1.25
+    res = (1.25*alpha**k - 0.5*alpha**(k-1) - 0.5*alpha**(k+1)) / (1-alpha**2)
     return res
 
 
@@ -35,16 +35,23 @@ def gen_x(alpha, N):
     x[0] = s_now - 0.5*s_prev # First iteration assumes x[-1]=0
     for n in range(1,N):
         x_prev, s_now = s_now, np.random.randn() # Promote the noise
-        x[n] = x[n-1] + s_now - 0.5*s_prev
+        x[n] = alpha*x[n-1] + s_now - 0.5*s_prev
     return x
 
 
 def statistical_Wiener(L,x):
-    n0 = 0 # starting point, 0 <= n0 < L-len(x)
-    X = x[n0:n0+L]; X = X[::-1]
-    d = x[L]
-    Rx = np.outer(X, X) / L
-    Rxd = d*X / L
+    Rx = np.zeros((L,L))
+    Rxd = np.zeros(L)
+
+    N = len(x)
+    for n0 in range(L):
+        #n0 = 0 # starting point, 0 <= n0 < L-len(x)
+        X = x[n0:n0+L]; X = X[::-1]
+        d = x[L]
+        Rx += np.outer(X, X)
+        Rxd += d*X
+    Rx /= N-L
+    Rxd /= N-L
 
     w = np.linalg.pinv(Rx).dot(Rxd) # pseudo-inverse for singular matrices
     return w
@@ -77,13 +84,17 @@ if __name__ == '__main__':
         w_opt = probabilistic_Wiener(L, alpha)
         w_stat = statistical_Wiener(L, x)
 
+        mu = 1e-4
+        w_hat, _ = LMS(x, L, mu)
+
+        x = gen_x(alpha, N) # regenerate the signal using the same parameters
         x_prob = signal.convolve(x, w_opt, mode='same') # filter x using w_opt
         x_stat = signal.convolve(x, w_stat, mode='same') # filter x using w_stat
-        mu = 1e-6
-        w_hat, x_lms = LMS(x, L, mu)
+        x_lms  = signal.convolve(x, w_hat, mode='same') # filter x using w_hat
 
         # plot
         plt.figure()
+        plt.subplot(2,1,1)
         plt.plot(x, 'k', label='original')
         plt.plot(x_prob, 'r', label='probabilistic')
         plt.plot(x_stat, 'g', label='statistical')
@@ -91,6 +102,13 @@ if __name__ == '__main__':
         plt.grid('on')
         plt.legend()
         plt.title('alpha=%.1f, L=%d' % (alpha, L))
+
+        plt.subplot(2,1,2)
+        plt.plot(x-x_prob, 'r', label='probabilistic error')
+        plt.plot(x-x_stat, 'g', label='statistical error')
+        plt.plot(x-x_lms, 'b', label='LMS error')
+        plt.grid('on')
+        plt.legend()
 
         print 'Estimated Wiener error: %.4f' % np.linalg.norm(w_stat - w_opt)
         print 'Estimated LMS error: %.4f' % np.linalg.norm(w_hat - w_opt)

@@ -33,49 +33,49 @@ Therefore
 Let $g[\cdot]$ be the inverse z-transform of $G(z)$. We see that $g[0]$ is the sum subject to $n - m = 0 \Leftrightarrow n = m$, i.e.
 \[g[0] = \sum_{m \geq 0} \alpha^{n+m} = \sum_{m \geq 0} \alpha^{2m}\]
 In general
-\[g[k] = \sum_{m \geq 0} \alpha^{2m+k}\]
+\[g[k] = \sum_{m \geq 0} \alpha^{2m+k} = \alpha^k \sum_{m=0}^{\infty} \alpha^{2m} = \frac{\alpha^k}{1- \alpha^2}\]
 Therefore
-\[a_x[k] = \sum_{m > 0} (1.25 \alpha^{2m+k} - 0.5 \alpha^{2m+k+1} - 0.5 \alpha^{2m+k-1})\]
+\[	a_x[k] = \frac{1}{1- \alpha^2} (1.25 \alpha^{k} - 0.5 \alpha^{k+1} - 0.5 \alpha^{k-1}) \]
 
-\item Figure \ref{fig:p5-1}-\ref{fig:p5-6} show the results of different approaches with varied choices of $\alpha$ and $L$ (in Figure \ref{fig:p5-2}, LMS result is almost the same as original signal, due to scaling). Overall, LMS approach has the best result and probabilistic approach does not work well with $\alpha = 0$. Moreover, larger $L$ also gives better approximation.
+\item Figure \ref{fig:p5-1}-\ref{fig:p5-6} show the results of different approaches with varied choices of $\alpha$ and $L$. Overall, the probabilistic result is closer to LMS than statistical one. When $\alpha = 0$, statistical and LMS approaches have higher error than when $\alpha = 0.9$. Moreover, larger $L$ also reduces the prediction error.
 \begin{figure}[htbp]
 	\centering
-	\includegraphics[width=0.8\textwidth]{images/p5-1}
+	\includegraphics[width=\textwidth]{images/p5-1}
 	\caption{$\alpha=0, L=2$.}
 	\label{fig:p5-1}
 \end{figure}
 
 \begin{figure}[htbp]
 	\centering
-	\includegraphics[width=0.8\textwidth]{images/p5-2}
+	\includegraphics[width=\textwidth]{images/p5-2}
 	\caption{$\alpha=0, L=4$.}
 	\label{fig:p5-2}
 \end{figure}
 
 \begin{figure}[htbp]
 	\centering
-	\includegraphics[width=0.8\textwidth]{images/p5-3}
+	\includegraphics[width=\textwidth]{images/p5-3}
 	\caption{$\alpha=0, L=7$.}
 	\label{fig:p5-3}
 \end{figure}
 
 \begin{figure}[htbp]
 	\centering
-	\includegraphics[width=0.8\textwidth]{images/p5-4}
+	\includegraphics[width=\textwidth]{images/p5-4}
 	\caption{$\alpha=0.9, L=2$.}
 	\label{fig:p5-4}
 \end{figure}
 
 \begin{figure}[htbp]
 	\centering
-	\includegraphics[width=0.8\textwidth]{images/p5-5}
+	\includegraphics[width=\textwidth]{images/p5-5}
 	\caption{$\alpha=0.9, L=4$.}
 	\label{fig:p5-5}
 \end{figure}
 
 \begin{figure}[htbp]
 	\centering
-	\includegraphics[width=0.8\textwidth]{images/p5-6}
+	\includegraphics[width=\textwidth]{images/p5-6}
 	\caption{$\alpha=0.9, L=7$.}
 	\label{fig:p5-6}
 \end{figure}
