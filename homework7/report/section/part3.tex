@@ -1,7 +1,33 @@
 \section{Polynomial Spaces with Orthogonality}\label{sec:p3}
 
 \begin{enumerate}[(a)]
-\item
-\item
-\item
+\item Let $v \in V_n$, then \[v = \sum_{j=0}^{n}\alpha_j v_j\]
+\[\deg(v) = \max\{\deg(v_j)\}_{j=0}^n \leq n\]
+Therefore $v$ can be written as $\sum_{j=0}^{n} \beta_j t^j$
+\[\Rightarrow v\in W_n \Rightarrow V_n \subset W_n\]
+We have
+\[\dim(V_n) = n \qquad \because \innerprod{v_k}{v_j} = \delta[k-j]\]
+\[\dim(W_n) = n \qquad \because \{1, t^1, t^2, \cdots t^n\} \text{ are independent}\]
+So $\dim(V_n) = \dim(W_n)$. Hence, $v_n = W_n$.
+
+\item $p$ is a polynomial of degree $m$, so $p \in V_n = W_n$.
+\[p = \sum_{j=0}^{m}\innerprod{p}{v_j}v_j\]
+For $k>m$,
+\begin{align*}
+	\innerprod{p}{v_k}
+	&= \innerprod{\sum_{j=0}^{m}\innerprod{p}{v_j}v_j}{v_k} \\
+	&= \sum_{j=0}^{m} \innerprod{p}{v_j} \innerprod{v_j}{v_k} \\
+	&= 0 \qquad \because \innerprod{v_k}{v_k} = 0
+\end{align*}
+
+\item $v \in V_n = W_n \Rightarrow v(t) = \sum_{j=0}^{n}\alpha_j t^j$
+\begin{align*}
+	\sum_{j=0}^{n} \alpha_j (t-t_0)^j 
+	&= \sum_{j=0}^{n} \alpha_j \left(\binom{j}{i}t^{j-i}(-t_0)^i\right) \\
+	&= \sum_{j=0}^{n} \alpha_j \binom{j}{i}t^{j}\frac{(-t_0)^i}{t^i} \\
+	&= \sum_{j=0}^{n} \left(\alpha_j \binom{j}{i}\frac{(-t_0)^i}{t^i}\right) t^{j}\\
+\end{align*}
+Since $i \leq j$, $\sum_{j=0}^{n} \left(\alpha_j \binom{j}{i}\frac{(-t_0)^i}{t^i}\right) t^{j}$ is a polynomial of degree up to $n$. So we can write it as
+\[\sum_{j=0}^{n} \alpha_j (t-t_0)^j = \sum_{j=0}^{n} \beta_j t^j\]
+Hence, it is shift-invariant.
 \end{enumerate}
