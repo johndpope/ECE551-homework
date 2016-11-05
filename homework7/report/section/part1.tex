@@ -1,1 +1,29 @@
 \section{Truncation as Filter Approximation}\label{sec:p1}
+
+\begin{enumerate}[(a)]
+\item Let $\psi = \{\varphi_k\}$ be the basis of $\mathbb{C}^\mathbb{Z}$
+\[h_d \in \mathbb{C}^\mathbb{Z} \Rightarrow h_d = \sum_{\varphi_k \in \psi} \alpha_k \varphi_k\]
+Since $I \subset \mathbb{Z}$, $\mathbb{C}^I \subset \mathbb{C}^\mathbb{Z}$, where $\mathbb{C}^I = \mathrm{span}\{\phi^I\}, \phi^I \subset \phi$.
+\begin{align*}
+	T_I h_d
+	&= \sum_{\varphi_k \in \psi}w[k]\alpha_k\varphi_k \\
+	&= \sum_{\varphi_k \in \psi^I}1\cdot\alpha_k\varphi_k + \sum_{\varphi_k \in \psi/\psi^I}0\cdot\alpha_k\varphi_k\\
+	&= \sum_{\varphi_k \in \psi^I}\alpha_k\varphi_k \in \mathrm{span}\{\psi^I\} = \mathbb{C}^I \\
+	\Rightarrow T_I h_d - h_d
+	&= \sum_{\varphi_k \in \psi/\psi^I} \alpha_k\varphi_k \\
+\end{align*}
+\[\Rightarrow \innerprod{T_I h_d - h_d}{T_Ih_d} = 0 \Rightarrow T_I h_d - h_d \perp T_Ih_d\]
+By orthogonality principal, $T_I h_d$ is the least square approximation of $h_d$ on $\ell_2(I)$.
+
+\item $\forall z \in \mathbb{C}^\mathbb{Z}$, we have
+\[T_I z = \sum_{\varphi_k \in \psi} \beta_k\varphi_k \perp T_Ih_d - h_d = \sum_{\varphi_k \in \psi/\psi^I} \alpha_k\varphi_k\]
+\[\Rightarrow \innerprod{T_I z}{T_Ih_d - h_d} = 0, \forall z \in \mathbb{C}^\mathbb{Z}\]
+Hence, $T_I$ is an orthogonal projection.
+
+\item For $I = \{0, \cdots, 4\}$,
+\[T_Ih_d = \vect{\cdots & 0 & \sinc 0 & \sinc \frac{\pi}{3} & \sinc \frac{2\pi}{3} & \sinc 1 & \sinc \frac{4\pi}{3} & 0 & \cdots }^\top\]
+
+\item We can choose $I$ as $\{-2,-1,0,1,2\}$, so $T_Ih_d$ is
+\[T_Ih_d = \vect{\cdots & 0 & -\sinc \frac{2\pi}{3} & -\sinc \frac{\pi}{3} & \sinc 0 & \sinc \frac{\pi}{3} & \sinc \frac{2\pi}{3} & 0 & \cdots}^\top\]
+
+\end{enumerate}
