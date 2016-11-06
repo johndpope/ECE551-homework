@@ -22,6 +22,7 @@ def interpolate(t, c, phi):
         s += c[n] * phi(t-n)
     return s
 
+
 if __name__ == '__main__':
     # part b
     phi = [
@@ -37,7 +38,7 @@ if __name__ == '__main__':
     filters = [
             lambda x: x,
             lambda x: x, #TODO
-            lambda x: fwd_bwd_filter(1.0, 1.0, x), #TODO: change mu, gamma
+            lambda x: fwd_bwd_filter(1.2, -0.2, x), #TODO: change mu, gamma
             lambda x: x, #TODO
             lambda x: x #TODO
             ]
@@ -53,6 +54,7 @@ if __name__ == '__main__':
         plt.subplot(len(phi), 1, k+1)
         plt.plot(t, s)
         plt.plot(np.arange(9), x, 'rx')
+    plt.show()
 
     # part c
     N = 5 # number of points
