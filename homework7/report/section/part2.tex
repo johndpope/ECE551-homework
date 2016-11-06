@@ -1,8 +1,20 @@
 \section{Lagrange Interpolation}\label{sec:p2}
 
 \begin{enumerate}[(a)]
-\item 
+\item We have 
+\[p_{\tilde{D}}(t) = p_D(t) + c(t-t_0)(t-t_1)\cdots(t-t_{N-1}) = p_D(t) = p_D(t) + c\prod_{j=0}^{N-1}(t-t_j)\]
+We want $p_{\tilde{D}}(t_N) = x_N$, so
+\[c\prod_{j=0}^{N-1}(t-t_j) = x_N \Leftrightarrow c = \frac{x_N}{\prod_{j=0}^{N-1}(t_N-t_j)}\]
 
-\item
+\item We already have
+\begin{align*}
+	p_{\tilde{D}}(t)
+	&= p_D(t) + \frac{x_N}{\prod_{j=0}^{N-1}(t_N-t_j)} \prod_{j=0}^{N-1}(t-t_j) \\
+	&= p_D(t) + x_N \prod_{j=0}^{N-1}\frac{t-t_j}{t_N-t_j} \\
+	&= p_{D^{(-1)}}(t) + x_{N-1} \prod_{j=0}^{N-2}\frac{t-t_j}{t_{N-1}-t_j} + x_N \prod_{j=0}^{N-1}\frac{t-t_j}{t_N-t_j} \\
+\end{align*}
+where $D^{(-1)} = D / \{(t_{N-1}m x_{N-1})\} = \{(t_k,x_k)\}_{k=0}^{N-2}$. Therefore, in general
+\[p_{\tilde{D}}(t) = \sum_{k=0}^{N}x_k \prod_{j \neq k}\frac{t-t_j}{t_k-t_j}  \]
+\[\Rightarrow p_{D}(t) = \sum_{k=0}^{N-1}x_k \prod_{j \neq k}\frac{t-t_j}{t_k-t_j}\]
 
 \end{enumerate}
