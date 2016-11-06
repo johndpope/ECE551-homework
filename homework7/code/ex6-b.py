@@ -1,6 +1,5 @@
 import numpy as np
 import matplotlib.pyplot as plt
-import ipdb
 
 
 def fwd_bwd_filter(gamma, mu, x):
@@ -55,30 +54,5 @@ if __name__ == '__main__':
         plt.plot(t, s)
         plt.plot(np.arange(9), x, 'rx')
 
-
-    # part c----------------------------------------------------------------------
-    N = 5 # number of points
-    plt.figure() # open a figure
-    plt.axis([0,1,0,1]) # ... and a axis
-    plt.grid('on')
-    points = np.array(plt.ginput(N)) # pick N points using mouse input
-    plt.plot(points.T[0], points.T[1], 'rx') # plot them
-
-
-    '''
-    t = np.array([])
-    for n in range(N-1):
-        new_segment = np.arange(points.T[0][n], points.T[0][n+1], 0.01)
-        t = np.concatenate((t, new_segment), axis=0)
-    ipdb.set_trace()
-    '''
-    t = np.linspace(0,N+1,100)
-    c = filters[1](points.T[1])
-    s = interpolate(t, c, phi[1])
-
-    plt.figure()
-    plt.plot(t, s, 'b-')
-    plt.plot(points.T[0], points.T[1], 'rx')
-    plt.grid('on')
-
     plt.show()
+    

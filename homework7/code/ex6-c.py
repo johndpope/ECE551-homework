@@ -24,7 +24,6 @@ def interpolate(t, c, phi):
 
 
 if __name__ == '__main__':
-    # part b-----------------------------------------------------------------------
     phi = [
             lambda t: 1.0*(np.abs(t)<0.5), # phi_0
             lambda t: (1-np.abs(t)) * (np.abs(t)<1), # phi_1
@@ -43,6 +42,7 @@ if __name__ == '__main__':
             lambda x: x, #TODO
             ]
     
+    '''
     x = [6,7,5,6,9,2,4,3,6]
     N = 500
     t = np.linspace(0,10,N)
@@ -54,9 +54,8 @@ if __name__ == '__main__':
         plt.subplot(len(phi), 1, k+1)
         plt.plot(t, s)
         plt.plot(np.arange(9), x, 'rx')
+    '''
 
-
-    # part c----------------------------------------------------------------------
     N = 5 # number of points
     plt.figure() # open a figure
     plt.axis([0,1,0,1]) # ... and a axis
