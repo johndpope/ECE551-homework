@@ -10,7 +10,7 @@ def fwd_bwd_filter(gamma, mu, x):
     for t in range(1, len(x)):
         v[t] = mu*v[t-1] + gamma*x[t]
 
-    y[len(y)-1] = 0 # based on your boundary conditions
+    y[len(y)-1] = v[-1] # based on your boundary conditions
     for t in range(len(x)-1, 0, -1):
         y[t-1] = mu*y[t] + gamma*v[t-1]
     return y
@@ -77,7 +77,7 @@ if __name__ == '__main__':
         s0 = interpolate(t, c0, phi[k])
         s1 = interpolate(t, c1, phi[k])
 
-        plt.plot(s0, s1, label='phi'+str(k))
+        plt.plot(s0, s1, label='\phi'+str(k))
 
     plt.plot(points.T[0], points.T[1], 'o')
     plt.axis([0,1,0,1]); plt.grid('on'); plt.legend()
