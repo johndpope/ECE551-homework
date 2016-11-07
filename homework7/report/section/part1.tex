@@ -15,9 +15,33 @@ Since $I \subset \mathbb{Z}$, $\mathbb{C}^I \subset \mathbb{C}^\mathbb{Z}$, wher
 \[\Rightarrow \innerprod{T_I h_d - h_d}{T_Ih_d} = 0 \Rightarrow T_I h_d - h_d \perp T_Ih_d\]
 By orthogonality principal, $T_I h_d$ is the least square approximation of $h_d$ on $\ell_2(I)$.
 
-\item $\forall z \in \mathbb{C}^\mathbb{Z}$, we have
-\[T_I z = \sum_{\varphi_k \in \psi} \beta_k\varphi_k \perp T_Ih_d - h_d = \sum_{\varphi_k \in \psi/\psi^I} \alpha_k\varphi_k\]
-\[\Rightarrow \innerprod{T_I z}{T_Ih_d - h_d} = 0, \forall z \in \mathbb{C}^\mathbb{Z}\]
+\item 
+\begin{comment}
+	$\forall z \in \mathbb{C}^\mathbb{Z}$, we have
+	\[T_I z = \sum_{\varphi_k \in \psi} \beta_k\varphi_k \perp T_Ih_d - h_d = \sum_{\varphi_k \in \psi/\psi^I} \alpha_k\varphi_k\]
+	\[\Rightarrow \innerprod{T_I z}{T_Ih_d - h_d} = 0, \forall z \in \mathbb{C}^\mathbb{Z}\]
+	Hence, $T_I$ is an orthogonal projection.
+\end{comment}
+Let $h \in \mathbb{C}^\mathbb{R}$
+\begin{align*}
+	T_Ih 
+	&= \sum_{\varphi_k \in \psi_I}1\cdot\alpha_k\phi_k + \sum_{\varphi_k \in \psi/\psi^I}0\cdot\alpha_k\phi_k \\
+	&= \sum_{\varphi_k \in \psi_I}\alpha_k\phi_k \\
+	&= \hat{h}\\
+	T_I (T_I h)
+	&= \sum_{\varphi_k \in \psi_I}1\cdot\alpha_k\phi_k + \sum_{\varphi_k \in \psi^I/\psi^I}0\cdot\alpha_k\phi_k \\
+	&= \sum_{\varphi_k \in \psi_I}\alpha_k\phi_k \\
+	&= \hat{h} \\
+	\Rightarrow T_I &= T_I^2
+\end{align*}
+Let $x,y \in \mathbb{C}^\mathbb{R}$
+\begin{align*}
+	\innerprod{T_Ix}{y}
+	&= \innerprod{\sum_{\varphi_k \in \psi_I}1\cdot\alpha_k\phi_k + \sum_{\varphi_k \in \psi/\psi^I}0\cdot\alpha_k\phi_k}{\sum_{\varphi_k \in \psi_I}\beta_k\phi_k + \sum_{\varphi_k \in \psi/\psi^I}\beta_k\phi_k} \\
+	&= \innerprod{\sum_{\varphi_k \in \psi_I}\alpha_k\phi_k + \sum_{\varphi_k \in \psi/\psi^I}\alpha_k\phi_k}{\sum_{\varphi_k \in \psi_I}1\cdot\beta_k\phi_k + \sum_{\varphi_k \in \psi/\psi^I}0\cdot\beta_k\phi_k} \\
+	&= \innerprod{x}{T_Iy} \\
+	\Rightarrow T_I &= T_I^*
+\end{align*}
 Hence, $T_I$ is an orthogonal projection.
 
 \item For $I = \{0, \cdots, 4\}$,
