@@ -19,7 +19,7 @@ There are three primary steps in preprocessing: background removal, resizing, an
 
 For resizing, the images are rescaled to the shape of $256 \times 256$ although the network receives inputs of dimension $227 \times 227$. This is because we want to remove the mean image of original AlexNet, whose size is $256 \times 256$. After that, the images are randomly cropped to the size of $227 \times 227$ to produce jittering during training. To ensure the shape are not distorted, the images are scaled along the their longer side, the other side is padded with zero (color) and duplicated with boundary (depth), as showed in Figure \ref{fig:apple_3_viewpoints}. However, this does not affect if we remove background from the images.
 
-The third step is to colorize depth. Depth sensors like the Xbox Kinect only give a single-channel intensity image proportional to the distance from the sensor. By converting depth images into three-channel data, we can treat them as images and feed into AlexNet (or other pretrained image recognition networks). Although there are different ways to colorize depth maps, jet colorization is proven superior in term of boosting system’s performance [ref???].
+The third step is to colorize depth. Depth sensors like the Xbox Kinect only give a single-channel intensity image proportional to the distance from the sensor. By converting depth images into three-channel data, we can treat them as images and feed into AlexNet (or other pretrained image recognition networks). Although there are different ways to colorize depth maps, jet colorization is proven superior in term of boosting system’s performance \cite{Eitel2015}.
 
 %-------------------------------------------------------------------------------------------------------
 \subsection{Network training}\label{sec:training}
@@ -37,7 +37,7 @@ where $\mathbf{x}^i$ is a RGB image, $\mathbf{d}^i$ is a depth image, and $\math
 	0, & \text{otherwise}
 	\end{cases}
 \end{align}
-where $M$ is the number of classes. The data are fed into the first training phase and then the second one.
+where $M$ is the number of classes. The data are fed into the first training phase and then the second one. In this project, I use Adam optimizer \cite{tensorflow2015-whitepaper}\cite{KingmaB14_adam}, included in TensorFlow, to minimize the loss. The learning rates are set as $10^{-3}$ for color and depth network and $10^{-5}$ for fusion; default decay rates of the optimizer is used.
 
 \subsubsection{Training the stream networks}
 Let $g^I(\mathbf{x}^i; \theta^I)$ be the representation for the color image $\mathbf{x}^i$ of the last fully connected layer from stream networks (\textit{fc7}) of AlexNet, where $\theta^I$ is the parameter. Similarly, we have $g^D(\mathbf{d}^i; \theta^D)$ for the depth image $\mathbf{d}^i$. Since we initialize the stream networks with pretrained weights, $\theta^I$ and $\theta^D$ are known. The weights $\mathbf{W}^I$ and $\mathbf{W}^D$ for RGB and depth streams are trained by solving
@@ -65,6 +65,4 @@ where $\theta^F$ is the parameters of this layer. We can train this layer with a
 	\min_{\mathbf{W}^F,\theta^I, \theta^D, \theta^F} = \sum_{i=1}^N \mathcal{L} \left( \text{softmax}\left(\mathbf{W}^F \mathcal{F}, \mathbf{y}^i\right)\right)
 \end{equation}
 
-Note that in this phase, the weights trained from the previous one are kept unchanged. Only the weights of the fusion network are optimized.
-
-\subsubsection{Minimizer}
+Note that in this phase, the weights trained from the previous one are kept unchanged as they play the role of feature extractor. Only the weights of the fusion network are optimized. 

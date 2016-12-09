@@ -1,1 +1,5 @@
 \section{Conclusions}\label{sec:conclusions}
+
+In this project, I build a system that can recognize objects using both color and depth information at the same time using TensorFlow. A surprising result is depth information always produce higher accuracy than color only by a simple preprocessing technique: colormapping. It is suspected that depth images strip off patterns on object's surface and reduce the variance in the system, thus the accuracy is higher. Although the system is overfitting, the results are a starting point for further improvement. 
+
+For future work, more experiments with processed depth data are preferred, rather than using raw information. Some possibilities are using ICP algorithmto construct point clouds from depth maps, applying point cloud voxelization, or synthesizing training data from foreign viewpoints. Since depth maps are proved to carry useful information about objects' shape, it is likely that a system cognition can be built using only the mask for background removal. Last but not least, it is promising to try a reversed process from depth colorization, i.e. building a network using only one dimensional depth data.
